@@ -17,15 +17,21 @@ class UsersTableSeeder extends Seeder
         $role_user = Role::where('name', 'user')->first();
 
         $admin = new User ();
-        $admin->name = 'Mo Che';
+        $admin->first_name = 'Mo';
+        $admin->last_name = 'Che';
         $admin->email = 'testadmin@test.ie';
+        $admin->mobile_number = '+353 86 444 2822';
+        $admin->address = '20 Address Road, Addressville, Dublin';
         $admin->password = bcrypt('testtest');
         $admin->save();
         $admin->roles()->attach($role_admin);
 
         $user = new User ();
-        $user->name = 'Mo Che';
+        $user->first_name = 'Mo';
+        $user->last_name = 'Che';
         $user->email = 'testuser@test.ie';
+        $user->mobile_number = '+353 86 444 2822';
+        $user->address = '20 Address Road, Addressville, Dublin';
         $user->password = bcrypt('testtest');
         $user->save();
         $user->roles()->attach($role_user);
