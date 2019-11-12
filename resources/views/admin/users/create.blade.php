@@ -6,7 +6,7 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="card">
                         <div class="card-header">
-                            Edit book
+                            Add new user
                         </div>
                         <div class="card-body">
                             @if ($errors->any())
@@ -18,34 +18,33 @@
                                     </ul>
                                 </div>
                             @endif
-                            <form method="POST" action="{{ route('admin.books.update', $book->id) }}">
-                                    <input type="hidden" name="_method" value="PUT">
+                            <form method="POST" action="{{ route('admin.users.store') }}">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <div class="form-group">
-                                    <label for="title">Title</label>
-                                    <input type="text" class="form-control" id="title" name="title" value="{{ old('title', $book->title) }}"/>
+                                    <label for="first_name">First Name</label>
+                                    <input type="text" class="form-control" id="first_name" name="first_name" value="{{ old('first_name') }}"/>
                                 </div>
                                 <div class="form-group">
-                                    <label for="author">Author</label>
-                                    <input type="text" class="form-control" id="author" name="author" value="{{ old('author', $book->author) }}"/>
+                                    <label for="last_name">Last Name</label>
+                                    <input type="text" class="form-control" id="first_name" name="first_name" value="{{ old('first_name') }}"/>
                                 </div>
                                 <div class="form-group">
-                                    <label for="publisher">Publisher</label>
-                                    <input type="text" class="form-control" id="publisher" name="publisher" value="{{ old('publisher', $book->publisher) }}"/>
+                                    <label for="email">Email</label>
+                                    <input type="text" class="form-control" id="email" name="email" value="{{ old('email') }}"/>
                                 </div>
                                 <div class="form-group">
-                                    <label for="year">Year</label>
-                                    <input type="text" class="form-control" id="year" name="year" value="{{ old('year', $book->year) }}"/>
+                                    <label for="password">Password</label>
+                                    <input type="text" class="form-control" id="password" name="password" value="{{ old('year') }}"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="isbn">ISBN</label>
-                                    <input type="text" class="form-control" id="isbn" name="isbn" value="{{ old('isbn', $book->isbn) }}"/>
+                                    <input type="text" class="form-control" id="isbn" name="isbn" value="{{ old('isbn') }}"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="price">Price</label>
-                                    <input type="text" class="form-control" id="price" name="price" value="{{ old('price', $book->price) }}"/>
+                                    <input type="text" class="form-control" id="price" name="price" value="{{ old('price') }}"/>
                                 </div>
-                                <a href="{{ route('admin.books.index') }}" class="btn btn-link">Cancel</a>
+                                <a href="{{ route('admin.users.index') }}" class="btn btn-link">Cancel</a>
                                 <button type="submit" class="btn btn-primary float-right">Submit</button>
                             </form>
                         </div>

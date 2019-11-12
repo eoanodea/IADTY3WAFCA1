@@ -15,6 +15,7 @@
                     @endif
 
                     You are logged in as an admin!
+                    <a href="{{ route('admin.users.index') }}" class="btn btn-primary">Users</a>
                 </div>
             </div>
         </div>

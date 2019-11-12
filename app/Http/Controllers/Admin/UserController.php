@@ -4,9 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Book;
+use App\User;
+use Illuminate\Support\Facades\Hash;
 
-class BookController extends Controller
+class UserController extends Controller
 {
 
     public function __construct()
@@ -21,10 +22,10 @@ class BookController extends Controller
      */
     public function index()
     {
-        $books = Book::all();
+        $users = User::all();
 
-        return view('admin.books.index')->with([
-            'books' => $books
+        return view('admin.users.index')->with([
+            'users' => $users
         ]);
     }
 
@@ -35,7 +36,7 @@ class BookController extends Controller
      */
     public function create()
     {
-        return view('admin.books.create');
+        return view('admin.users.create');
     }
 
     /**
@@ -47,25 +48,22 @@ class BookController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|max:191',
-            'author' => 'required|max:191',
-            'publisher' => 'required|max:191',
-            'year' => 'required|integer|min:1900',
-            'isbn' => 'required|alpha_num|size:13|unique:books',
-            'price' => 'required|numeric|min:0',
+            'first_name' => 'required|max:191',
+            'last_name' => 'required|max:191',
+            'email' => 'required|email|unique:users|max:191',
+            'password' => 'required|min:8',
+            'role' => 'required'
         ]);
 
-        $book = new Book();
-        $book->title = $request->input('title');
-        $book->author = $request->input('author');
-        $book->publisher = $request->input('publisher');
-        $book->year = $request->input('year');
-        $book->isbn = $request->input('isbn');
-        $book->price = $request->input('price');
+        $user = new User();
+        $user->first_name = $request->input('first_name');
+        $user->last_name = $request->input('last_name');
+        $user->email = $request->input('email');
+        $user->password = Hash::make($request->input('password'));
+        
+        $user->save();
 
-        $book->save();
-
-        return redirect()->route('admin.books.index');
+        return redirect()->route('admin.users.index');
 
     }
 
@@ -77,10 +75,10 @@ class BookController extends Controller
      */
     public function show($id)
     {
-        $book = Book::findOrFail($id);
+        $user = User::findOrFail($id);
 
-        return view('admin.books.show')->with([
-            'book' => $book
+        return view('admin.users.show')->with([
+            'user' => $user
         ]);
     }
 
@@ -92,10 +90,10 @@ class BookController extends Controller
      */
     public function edit($id)
     {
-        $book = Book::findOrFail($id);
+        $user = User::findOrFail($id);
 
-        return view('admin.books.edit')->with([
-            'book' => $book
+        return view('admin.users.edit')->with([
+            'user' => $user
         ]);
     }
 
@@ -108,27 +106,27 @@ class BookController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $book = Book::findOrFail($id);
+        $user = User::findOrFail($id);
 
         $request->validate([
             'title' => 'required|max:191',
             'author' => 'required|max:191',
             'publisher' => 'required|max:191',
             'year' => 'required|integer|min:1900',
-            'isbn' => 'required|alpha_num|size:13|unique:books,isbn,'.$book->id,
+            'isbn' => 'required|alpha_num|size:13|unique:users,isbn,'.$user->id,
             'price' => 'required|numeric|min:0',
         ]);
 
-        $book->title = $request->input('title');
-        $book->author = $request->input('author');
-        $book->publisher = $request->input('publisher');
-        $book->year = $request->input('year');
-        $book->isbn = $request->input('isbn');
-        $book->price = $request->input('price');
+        $user->title = $request->input('title');
+        $user->author = $request->input('author');
+        $user->publisher = $request->input('publisher');
+        $user->year = $request->input('year');
+        $user->isbn = $request->input('isbn');
+        $user->price = $request->input('price');
 
-        $book->save();
+        $user->save();
 
-        return redirect()->route('admin.books.index');
+        return redirect()->route('admin.users.index');
     }
 
     /**
@@ -139,9 +137,9 @@ class BookController extends Controller
      */
     public function destroy($id)
     {
-        $book = Book::findOrFail($id);
-        $book->delete();
+        $user = User::findOrFail($id);
+        $user->delete();
 
-        return redirect()->route('admin.books.index');
+        return redirect()->route('admin.users.index');
     }
 }
