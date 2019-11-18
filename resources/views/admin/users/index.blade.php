@@ -15,6 +15,7 @@
                         @else
                             <table id="table-users" class="table table-hover">
                                 <thead>
+                                    <th>Role</th>
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Actions</th>
@@ -23,6 +24,7 @@
                                     
                                     @foreach ($users as $user)
                                         <tr data-id="{{ $user->id }}">
+                                            <td>{{ $user->doctor ? $user->doctor->date_started : 'Patient'}}</td>
                                             <td>{{ $user->first_name }} {{ $user->last_name }} @if(Auth::user()->id == $user->id) (You) @endif</td>
                                             <td>{{ $user->email }}</td>
                                             

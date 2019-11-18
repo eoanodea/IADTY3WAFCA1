@@ -35,5 +35,45 @@ class UsersTableSeeder extends Seeder
         $user->password = bcrypt('testtest');
         $user->save();
         $user->roles()->attach($role_user);
+
+        $faker = \Faker\Factory::create();
+
+        for($i = 0; $i < 5; $i++) {
+            $user = new User();
+            $user->first_name = $faker->firstName;
+            $user->last_name = $faker->lastName;
+            $user->email = $faker->email;
+            $user->mobile_number = $this->random_phone();
+            $user->address = $faker->address;
+            $user->password = bcrypt($faker->password);
+            $user->save();
+            $user->roles()->attach($role_admin);
+        }
+        
+        for($i = 0; $i < 10; $i++) {
+            $user = new User();
+            $user->first_name = $faker->firstName;
+            $user->last_name = $faker->lastName;
+            $user->email = $faker->email;
+            $user->mobile_number = $this->random_phone();
+            $user->address = $faker->address;
+            $user->password = bcrypt($faker->password);
+            $user->save();
+            $user->roles()->attach($role_user);
+        }
+    }
+    private function random_phone() {
+        return '0' . 
+            $this->random_str(2, '0123456789'). '-' . 
+            $this->random_str(7, '0123456789');
+    }
+    //fill in keyspace
+    private function random_str($length, $keyspace) {
+        $pieces = [];
+        $max = mb_strlen($keyspace, '8bit') - 1;
+        for($i = 0; $i < $length; ++$i) {
+            $pieces[] = $keyspace[random_int(0, $max)];
+        };
+        return implode('', $pieces);
     }
 }
