@@ -6,7 +6,7 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="card">
                     <div class="card-header">
-                        Patient: {{ $user->first_name }} {{ $user->last_name }} @if(Auth::user()->id == $user->id) (You) @endif
+                        {{ $user->doctor ? 'Doctor - ' : ''}}{{ $user->first_name }} {{ $user->last_name }} @if(Auth::user()->id == $user->id) (You) @endif
                     </div>
                     <div class="card-body">
                         
@@ -24,6 +24,12 @@
                                             <td>Email</td>
                                             <td>{{ $user->email }}</td>
                                         </tr>
+                                        @if ($user->doctor)
+                                        <tr>
+                                            <td>Date Started</td>
+                                            <td>{{ $user->doctor->date_started }}</td>
+                                        </tr>
+                                        @endif
                                     </tbody>
                             </table>
                             <a href="{{ route('admin.users.index', $user->id) }}" class="btn btn-default">Back</a>

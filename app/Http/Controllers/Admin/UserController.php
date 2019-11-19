@@ -23,9 +23,16 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
+        $returnedUsers = array();
+
+        foreach($users as $user) {
+            if($user->doctor) {
+                array_push($returnedUsers, $user);
+            }
+        }
 
         return view('admin.users.index')->with([
-            'users' => $users
+            'users' => $returnedUsers
         ]);
     }
 

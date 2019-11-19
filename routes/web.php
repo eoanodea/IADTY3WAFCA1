@@ -20,6 +20,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/admin/home', 'Admin\HomeController@index')->name('admin.home');
 Route::get('/user/home', 'User\HomeController@index')->name('user.home');
 
+Route::get('/admin/users/patient', 'Admin\UserController@index')->name('admin.users.index');
+Route::get('/admin/users/patient/create', 'Admin\UserController@create')->name('admin.users.create');
+Route::get('/admin/users/patient/{id}', 'Admin\UserController@show')->name('admin.users.show');
+
 Route::get('/admin/users', 'Admin\UserController@index')->name('admin.users.index');
 Route::get('/admin/users/create', 'Admin\UserController@create')->name('admin.users.create');
 Route::get('/admin/users/{id}', 'Admin\UserController@show')->name('admin.users.show');
