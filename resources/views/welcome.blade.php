@@ -8,9 +8,13 @@
                 <div class="card-header">Welcome</div>
 
                 <div class="card-body">
-                    Welcome to MoBookStore</a>
+                    Welcome to West Medical Centre</a>
                     <br />
-                    Learn more <a href={{ route('about') }}>about us</a>
+                    <br />
+                    <div class="float-right">
+                        <a class="btn btn-primary" href={{ route('login')}}>Login</a>
+                        <a class="btn btn-secondary" href={{ route('about') }}>Learn more</a>
+                    </div>
                 </div>
             </div>
         </div>

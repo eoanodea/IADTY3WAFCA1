@@ -24,6 +24,14 @@
                                             <td>Email</td>
                                             <td>{{ $user->email }}</td>
                                         </tr>
+                                        <tr>
+                                            <td>Mobile</td>
+                                            <td>{{ $user->mobile_number }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Address</td>
+                                            <td>{{ $user->address }}</td>
+                                        </tr>
                                         @if ($user->doctor)
                                         <tr>
                                             <td>Date Started</td>
@@ -32,9 +40,9 @@
                                         @endif
                                     </tbody>
                             </table>
-                            <a href="{{ route('admin.users.index', $user->id) }}" class="btn btn-default">Back</a>
-                            <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-warning">Edit</a>
-                            <form style="display:inline-block" method="POST" action="{{ route('admin.users.destroy', $user->id) }}">
+                            <a href="{{ route('admin.doctors.index', $user->id) }}" class="btn btn-default">Back</a>
+                            <a href="{{ route('admin.doctors.edit', $user->id) }}" class="btn btn-warning">Edit</a>
+                            <form style="display:inline-block" method="POST" action="{{ route('admin.doctors.destroy', $user->id) }}">
                                 <input type="hidden" name="_method" value="DELETE">
                                 <input type="hidden" name="token" value="{{ csrf_token() }}">
                                 <button type="submit" class="form-control btn btn-danger">Delete</button>

@@ -24,11 +24,27 @@
                                             <td>Email</td>
                                             <td>{{ $user->email }}</td>
                                         </tr>
+                                        <tr>
+                                            <td>Mobile</td>
+                                            <td>{{ $user->mobile_number }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Address</td>
+                                            <td>{{ $user->address }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Insurance Company</td>
+                                            <td>{{ $user->patient->insurance_company }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Insurance Policy Number</td>
+                                            <td>{{ $user->patient->policy_number }}</td>
+                                        </tr>
                                     </tbody>
                             </table>
-                            <a href="{{ route('admin.users.index', $user->id) }}" class="btn btn-default">Back</a>
-                            <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-warning">Edit</a>
-                            <form style="display:inline-block" method="POST" action="{{ route('admin.users.destroy', $user->id) }}">
+                            <a href="{{ route('admin.patients.index', $user->id) }}" class="btn btn-default">Back</a>
+                            <a href="{{ route('admin.patients.edit', $user->id) }}" class="btn btn-warning">Edit</a>
+                            <form style="display:inline-block" method="POST" action="{{ route('admin.patients.destroy', $user->id) }}">
                                 <input type="hidden" name="_method" value="DELETE">
                                 <input type="hidden" name="token" value="{{ csrf_token() }}">
                                 <button type="submit" class="form-control btn btn-danger">Delete</button>

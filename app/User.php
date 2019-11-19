@@ -43,6 +43,9 @@ class User extends Authenticatable
     public function doctor() {
         return $this->hasOne('App\Doctor');
     }
+    public function patient() {
+        return $this->hasOne('App\Patient');
+    }
     public function authorizeRoles($roles) {
         if(is_array($roles)) {
             return $this->hasAnyRoles($roles) || abort(401, 'This action is unauthorized');

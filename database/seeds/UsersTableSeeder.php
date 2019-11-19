@@ -20,7 +20,7 @@ class UsersTableSeeder extends Seeder
         $admin->first_name = 'Mo';
         $admin->last_name = 'Che';
         $admin->email = 'testadmin@test.ie';
-        $admin->mobile_number = '+353 86 444 2822';
+        $admin->mobile_number = $this->random_phone();
         $admin->address = '20 Address Road, Addressville, Dublin';
         $admin->password = bcrypt('testtest');
         $admin->save();
@@ -30,37 +30,20 @@ class UsersTableSeeder extends Seeder
         $user->first_name = 'Mo';
         $user->last_name = 'Che';
         $user->email = 'testuser@test.ie';
-        $user->mobile_number = '+353 86 444 2822';
+        $user->mobile_number = $this->random_phone();
         $user->address = '20 Address Road, Addressville, Dublin';
         $user->password = bcrypt('testtest');
         $user->save();
         $user->roles()->attach($role_user);
 
-        $faker = \Faker\Factory::create();
+        factory(App\User::class, 10)->create()->each(function ($user) {
+            $user->roles()->attach(Role::where('name', 'admin')->first());
+        });
 
-        for($i = 0; $i < 5; $i++) {
-            $user = new User();
-            $user->first_name = $faker->firstName;
-            $user->last_name = $faker->lastName;
-            $user->email = $faker->email;
-            $user->mobile_number = $this->random_phone();
-            $user->address = $faker->address;
-            $user->password = bcrypt($faker->password);
-            $user->save();
-            $user->roles()->attach($role_admin);
-        }
-        
-        for($i = 0; $i < 10; $i++) {
-            $user = new User();
-            $user->first_name = $faker->firstName;
-            $user->last_name = $faker->lastName;
-            $user->email = $faker->email;
-            $user->mobile_number = $this->random_phone();
-            $user->address = $faker->address;
-            $user->password = bcrypt($faker->password);
-            $user->save();
-            $user->roles()->attach($role_user);
-        }
+        factory(App\User::class, 20)->create()->each(function ($user) {
+            $user->roles()->attach(Role::where('name', 'user')->first());
+        });
+
     }
     private function random_phone() {
         return '0' . 

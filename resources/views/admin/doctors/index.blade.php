@@ -6,8 +6,8 @@
         <div class="col-md-12">
             <div class="card">
                     <div class="card-header">
-                        Users
-                    <a href="{{ route('admin.users.create') }}" class="btn btn-primary float-right">Add</a>
+                        Doctors
+                    <a href="{{ route('admin.doctors.create') }}" class="btn btn-primary float-right">Add</a>
                     </div>
                     <div class="card-body">
                         @if (count($users) === 0)
@@ -15,23 +15,22 @@
                         @else
                             <table id="table-users" class="table table-hover">
                                 <thead>
-                                    <th>Role</th>
                                     <th>Name</th>
                                     <th>Email</th>
+                                    <th>Date Started</th>
                                     <th>Actions</th>
                                 </thead>
                                 <tbody>
                                     
                                     @foreach ($users as $user)
                                         <tr data-id="{{ $user->id }}">
-                                            <td>{{ $user->doctor ? $user->doctor->date_started : 'Patient'}}</td>
                                             <td>{{ $user->first_name }} {{ $user->last_name }} @if(Auth::user()->id == $user->id) (You) @endif</td>
                                             <td>{{ $user->email }}</td>
-                                            
+                                            <td>{{ $user->doctor->date_started}}</td>
                                             <td>
-                                                <a href="{{ route('admin.users.show', $user->id) }}" class="btn btn-default">View</a>
-                                                <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-warning">Edit</a>
-                                            <form style="display:inline-block" method="POST" action="{{ route('admin.users.destroy', $user->id) }}">
+                                                <a href="{{ route('admin.doctors.show', $user->id) }}" class="btn btn-default">View</a>
+                                                <a href="{{ route('admin.doctors.edit', $user->id) }}" class="btn btn-warning">Edit</a>
+                                            <form style="display:inline-block" method="POST" action="{{ route('admin.doctors.destroy', $user->id) }}">
                                                 <input type="hidden" name="_method" value="DELETE">
                                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                 <button type="submit" class="form-control btn btn-danger">Delete</button>

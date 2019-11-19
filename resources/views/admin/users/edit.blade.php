@@ -18,7 +18,7 @@
                                     </ul>
                                 </div>
                             @endif
-                            <form method="POST" action="{{ route('admin.users.update', $user->id) }}">
+                            <form method="POST" action="{{ route('admin.patients.update', $user->id) }}">
                                     <input type="hidden" name="_method" value="PUT">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <div class="form-group">
@@ -45,7 +45,7 @@
                                     <label for="price">Price</label>
                                     <input type="text" class="form-control" id="price" name="price" value="{{ old('price', $user->price) }}"/>
                                 </div>
-                                <a href="{{ route('admin.users.index') }}" class="btn btn-link">Cancel</a>
+                                <a href="{{ route('admin.patients.index') }}" class="btn btn-link">Cancel</a>
                                 <button type="submit" class="btn btn-primary float-right">Submit</button>
                             </form>
                         </div>

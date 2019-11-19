@@ -15,7 +15,12 @@
                     @endif
 
                     You are logged in as an admin!
-                    <a href="{{ route('admin.users.index') }}" class="btn btn-primary">Users</a>
+                    <br />
+                    <br />
+                    <div class="float-right">
+                        <a href="{{ route('admin.doctors.index') }}" class="btn btn-primary">Doctors</a>
+                        <a href="{{ route('admin.patients.index') }}" class="btn btn-secondary">Patients</a>
+                    </div>
                 </div>
             </div>
         </div>
