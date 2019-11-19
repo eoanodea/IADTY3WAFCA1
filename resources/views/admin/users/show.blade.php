@@ -32,6 +32,7 @@
                                             <td>Address</td>
                                             <td>{{ $user->address }}</td>
                                         </tr>
+                                        @if($user->patient && $user->patient->has_insurance)
                                         <tr>
                                             <td>Insurance Company</td>
                                             <td>{{ $user->patient->insurance_company }}</td>
@@ -40,6 +41,12 @@
                                             <td>Insurance Policy Number</td>
                                             <td>{{ $user->patient->policy_number }}</td>
                                         </tr>
+                                        @else 
+                                            <tr>
+                                                <td>Insurance Details</td>
+                                                <td>User has no insurance</td>
+                                            </tr>
+                                        @endif
                                     </tbody>
                             </table>
                             <a href="{{ route('admin.patients.index', $user->id) }}" class="btn btn-default">Back</a>
