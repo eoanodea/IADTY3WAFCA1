@@ -14,7 +14,8 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         $role_admin = Role::where('name', 'admin')->first();
-        $role_user = Role::where('name', 'user')->first();
+        $role_doctor = Role::where('name', 'doctor')->first();
+        $role_patient = Role::where('name', 'patient')->first();
 
         $admin = new User ();
         $admin->first_name = 'Mo';
@@ -29,19 +30,29 @@ class UsersTableSeeder extends Seeder
         $user = new User ();
         $user->first_name = 'Mo';
         $user->last_name = 'Che';
-        $user->email = 'testuser@test.ie';
+        $user->email = 'testdoctor@test.ie';
         $user->mobile_number = $this->random_phone();
         $user->address = '20 Address Road, Addressville, Dublin';
         $user->password = bcrypt('testtest');
         $user->save();
-        $user->roles()->attach($role_user);
+        $user->roles()->attach($role_doctor);
+
+        $user = new User ();
+        $user->first_name = 'Mo';
+        $user->last_name = 'Che';
+        $user->email = 'testpatient@test.ie';
+        $user->mobile_number = $this->random_phone();
+        $user->address = '20 Address Road, Addressville, Dublin';
+        $user->password = bcrypt('testtest');
+        $user->save();
+        $user->roles()->attach($role_patient);
 
         factory(App\User::class, 10)->create()->each(function ($user) {
-            $user->roles()->attach(Role::where('name', 'admin')->first());
+            $user->roles()->attach(Role::where('name', 'doctor')->first());
         });
 
         factory(App\User::class, 20)->create()->each(function ($user) {
-            $user->roles()->attach(Role::where('name', 'user')->first());
+            $user->roles()->attach(Role::where('name', 'patient')->first());
         });
 
     }

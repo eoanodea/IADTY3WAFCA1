@@ -14,9 +14,9 @@
                         </div>
                     @endif
 
-                    You are logged in as a user!
+                    You are logged in as a Patient!
                     <br />
-                    <a class="btn btn-primary"href="{{ route('user.home') }}">View Books </a>
+                    <a class="btn btn-primary"href="{{ route('patient.show', Auth::user()->id) }}">View Profile</a>
                 </div>
             </div>
         </div>

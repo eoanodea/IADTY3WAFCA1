@@ -10,10 +10,10 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('role:admin');
+        // $this->middleware('role:patient');
     }
 
     public function index() {
-        return view('admin.home');
+        return view('user.home');
     }
 }

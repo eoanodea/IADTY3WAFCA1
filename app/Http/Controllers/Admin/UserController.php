@@ -85,7 +85,7 @@ class UserController extends Controller
         $user->address = $request->input('address');
         $user->save();
 
-        $user->roles()->attach(Role::where('name', 'user')->first());
+        $user->roles()->attach(Role::where('name', 'patient')->first());
 
         $patient = new Patient();
         if($request->input('has_insurance')) {

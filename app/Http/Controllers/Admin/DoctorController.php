@@ -13,7 +13,7 @@ class DoctorController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('role:admin');
+        $this->middleware('role:doctor');
     }
 
     /**
@@ -73,6 +73,8 @@ class DoctorController extends Controller
         $user->mobile_number = $request->input('mobile_number');
         $user->password = Hash::make($request->input('password'));
         $user->save();
+
+        $user->roles()->attach(Role::where('name', 'doctor')->first());
 
         $doctor = new Doctor();
         $doctor->date_started = $request->input('date_started');

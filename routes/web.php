@@ -17,9 +17,11 @@ Route::get('/about', 'PageController@about')->name('about');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/admin/home', 'Admin\HomeController@index')->name('admin.home');
-Route::get('/user/home', 'User\HomeController@index')->name('user.home');
 
+Route::get('/patient/home', 'User\HomeController@index')->name('patient.home');
+Route::get('/patient/{id}', 'User\HomeController@show')->name('patient.show');
+
+Route::get('/admin/home', 'Admin\HomeController@index')->name('admin.home');
 Route::get('/admin/patients', 'Admin\UserController@index')->name('admin.patients.index');
 Route::get('/admin/patients/create', 'Admin\UserController@create')->name('admin.patients.create');
 Route::get('/admin/patients/{id}', 'Admin\UserController@show')->name('admin.patients.show');

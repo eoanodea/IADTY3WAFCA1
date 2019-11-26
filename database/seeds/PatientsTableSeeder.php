@@ -13,10 +13,10 @@ class PatientsTableSeeder extends Seeder
      */
     public function run()
     {
-        $role_user = Role::where('name', 'user')->first();
+        $role_patient = Role::where('name', 'patient')->first();
         $faker = \Faker\Factory::create();
 
-        foreach($role_user->users as $user) {
+        foreach($role_patient->users as $user) {
             $patient = new Patient();
             $patient->has_insurance = false;
             $patient->insurance_company = $faker->company;

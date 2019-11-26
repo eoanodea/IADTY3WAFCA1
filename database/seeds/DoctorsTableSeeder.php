@@ -13,9 +13,9 @@ class DoctorsTableSeeder extends Seeder
      */
     public function run()
     {
-        $role_admin = Role::where('name', 'admin')->first();
+        $role_doctor = Role::where('name', 'doctor')->first();
 
-        foreach($role_admin->users as $user) {
+        foreach($role_doctor->users as $user) {
             $doctor = new Doctor();
 
             $doctor->date_started = $this->random_date();

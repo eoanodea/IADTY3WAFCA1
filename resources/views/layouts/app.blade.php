@@ -33,13 +33,15 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        @if(Auth::user() && Auth::user()->doctor)
+                        @if(Auth::user() && Auth::user()->hasRole('admin'))
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('admin.patients.index') }}">Patients</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('admin.doctors.index') }}">Doctors</a>
-                            </li>                                
+                            </li>    
+                        @else
+                            <p>not an admin</p>                 
                         @endif
                     </ul>
 
