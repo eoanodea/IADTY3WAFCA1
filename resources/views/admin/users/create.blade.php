@@ -34,7 +34,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Password</label>
-                                    <input type="text" class="form-control" id="password" name="password" value="{{ old('year') }}"/>
+                                    <input type="password" class="form-control" id="password" name="password" value="{{ old('password') }}"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="mobile_number">Mobile</label>

@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Doctor;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class DoctorController extends Controller
 {
@@ -54,22 +56,33 @@ class DoctorController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'first_name' => 'required|max:191',
-            'last_name' => 'required|max:191',
+            'first_name' => 'required|max:191|string',
+            'last_name' => 'required|max:191|string',
             'email' => 'required|email|unique:users|max:191',
             'password' => 'required|min:8',
-            'role' => 'required'
+            'address' => 'required|max:255|string',
+            'mobile_number' => 'required|max:191|string',
+            'date_started' => 'required|date'
         ]);
 
         $user = new User();
         $user->first_name = $request->input('first_name');
         $user->last_name = $request->input('last_name');
         $user->email = $request->input('email');
+        $user->address = $request->input('address');
+        $user->mobile_number = $request->input('mobile_number');
         $user->password = Hash::make($request->input('password'));
-        
         $user->save();
 
-        return redirect()->route('admin.doctors.index');
+        $doctor = new Doctor();
+        $doctor->date_started = $request->input('date_started');
+        $doctor->user_id = $user->id;
+
+        $doctor->save();
+
+        return view('admin.doctors.show')->with([
+            'user' => $user
+        ]);
     }
 
 
@@ -118,8 +131,10 @@ class DoctorController extends Controller
             'first_name' => 'required|max:191',
             'last_name' => 'required|max:191',
             'email' => 'required|email|unique:users,email,'.$id.'|max:191',
-            'mobile_number' => 'required',
-            'address' => 'required'
+            'password' => 'min:8',
+            'address' => 'required|max:255|string',
+            'mobile_number' => 'required|max:191|string',
+            'date_started' => 'required|date'
         ]);
 
         $user->first_name = $request->input('first_name');
@@ -127,10 +142,15 @@ class DoctorController extends Controller
         $user->email = $request->input('email');
         $user->mobile_number = $request->input('mobile_number');
         $user->address = $request->input('address');
+        $user->doctor->date_started = $request->input('date_started');
 
         $user->save();
+        $user->doctor->save();
 
-        return redirect()->route('admin.doctors.index');
+
+        return view('admin.doctors.show')->with([
+            'user' => $user
+        ]);
     }
 
     /**

@@ -64,6 +64,7 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request);
         $request->validate([
             'first_name' => 'required|max:191',
             'last_name' => 'required|max:191',
@@ -71,9 +72,8 @@ class UserController extends Controller
             'password' => 'required|min:8',
             'mobile_number' => 'required',
             'address' => 'required',
-            'has_insurance' => 'bool',
-            'insurance_company' => 'string|max:191',
-            'policy_number' => 'string|max:191'
+            'insurance_company' => 'string|max:191|nullable',
+            'policy_number' => 'string|max:191|nullable'
         ]);
 
         $user = new User();
@@ -88,13 +88,18 @@ class UserController extends Controller
         $user->roles()->attach(Role::where('name', 'user')->first());
 
         $patient = new Patient();
-        $patient->has_insurance = $request->input('has_insurance');
-        $patient->insurance_company = $request->input('insurance_company');
-        $patient->policy_number = $request->input('policy_number');
-        $patient->user_id = $user->id;
+        if($request->input('has_insurance')) {
+            $patient->has_insurance = true;
+            $patient->insurance_company = $request->input('insurance_company');
+            $patient->policy_number = $request->input('policy_number');
+        } else $patient->has_insurance = false;
         
-
-        return redirect()->route('admin.patients.index');
+        $patient->user_id = $user->id;
+        $patient->save();
+        
+        return view('admin.users.show')->with([
+            'user' => $user
+        ]);
     }
 
     /**
@@ -129,8 +134,8 @@ class UserController extends Controller
             'email' => 'required|email|unique:users,email,'.$id.'|max:191',
             'mobile_number' => 'required',
             'address' => 'required',
-            'insurance_company' => 'required',
-            'policy_number' => 'required'
+            'insurance_company' => 'string|max:191|nullable',
+            'policy_number' => 'string|max:191|nullable'
         ]);
 
         $user->first_name = $request->input('first_name');
@@ -138,13 +143,23 @@ class UserController extends Controller
         $user->email = $request->input('email');
         $user->mobile_number = $request->input('mobile_number');
         $user->address = $request->input('address');
-        $user->patient->insurance_company = $request->input('insurance_company');
-        $user->patient->policy_number = $request->input('policy_number');
+        
+        if($request->input('insurance_company') !== null) {
+            $user->patient->has_insurance = true;
+            $user->patient->insurance_company = $request->input('insurance_company');
+            $user->patient->policy_number = $request->input('policy_number');
+        } else {
+            $user->patient->has_insurance = false;
+            $user->patient->insurance_company = null;
+            $user->patient->policy_number = null;
+        }
         
         $user->save();
         $user->patient->save();
 
-        return redirect()->route('admin.patients.index');
+        return view('admin.users.show')->with([
+            'user' => $user
+        ]);
     }
 
     /**
