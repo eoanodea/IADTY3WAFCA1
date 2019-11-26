@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Hash;
 
-class UserController extends Controller
+class PatientController extends Controller
 {
 
     public function __construct()
@@ -29,12 +29,12 @@ class UserController extends Controller
         $returnedUsers = array();
 
         foreach($users as $user) {
-            if(!$user->doctor) {
+            if($user->patient) {
                 array_push($returnedUsers, $user);
             }
         }
 
-        return view('admin.users.index')->with([
+        return view('admin.patients.index')->with([
             'users' => $returnedUsers
         ]);
     }
@@ -46,7 +46,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.users.create');
+        return view('admin.patients.create');
     }
     /**
      * Display the specified resource.
@@ -57,7 +57,7 @@ class UserController extends Controller
     public function show($id) {
         $user = User::findOrFail($id);
         
-        return view('admin.users.show')->with([
+        return view('admin.patients.show')->with([
             'user' => $user
         ]);
     }
@@ -97,7 +97,7 @@ class UserController extends Controller
         $patient->user_id = $user->id;
         $patient->save();
         
-        return view('admin.users.show')->with([
+        return view('admin.patients.show')->with([
             'user' => $user
         ]);
     }
@@ -112,7 +112,7 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        return view('admin.users.edit')->with([
+        return view('admin.patients.edit')->with([
             'user' => $user
         ]);
     }
@@ -157,7 +157,7 @@ class UserController extends Controller
         $user->save();
         $user->patient->save();
 
-        return view('admin.users.show')->with([
+        return view('admin.patients.show')->with([
             'user' => $user
         ]);
     }

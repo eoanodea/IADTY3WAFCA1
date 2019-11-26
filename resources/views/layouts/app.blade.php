@@ -40,8 +40,10 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('admin.doctors.index') }}">Doctors</a>
                             </li>    
-                        @else
-                            <p>not an admin</p>                 
+                        @elseif(Auth::user() && Auth::user()->hasRole('doctor'))
+                            <p>Doctor</p>
+                        @elseif(Auth::user() && Auth::user()->hasRole('patient'))
+                            <p>Patient</p>                 
                         @endif
                     </ul>
 

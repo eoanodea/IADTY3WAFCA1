@@ -18,17 +18,20 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/patient/home', 'User\HomeController@index')->name('patient.home');
-Route::get('/patient/{id}', 'User\HomeController@show')->name('patient.show');
+Route::get('/patient/home', 'User\PatientController@index')->name('patient.home');
+Route::get('/patient/{id}', 'User\PatientController@show')->name('patient.show');
+
+Route::get('/doctor/home', 'User\DoctorController@index')->name('doctor.home');
+Route::get('/doctor/{id}', 'User\DoctorController@show')->name('doctor.show');
 
 Route::get('/admin/home', 'Admin\HomeController@index')->name('admin.home');
-Route::get('/admin/patients', 'Admin\UserController@index')->name('admin.patients.index');
-Route::get('/admin/patients/create', 'Admin\UserController@create')->name('admin.patients.create');
-Route::get('/admin/patients/{id}', 'Admin\UserController@show')->name('admin.patients.show');
-Route::post('/admin/patients/store', 'Admin\UserController@store')->name('admin.patients.store');
-Route::get('/admin/patients/{id}/edit', 'Admin\UserController@edit')->name('admin.patients.edit');
-Route::put('/admin/patients/{id}', 'Admin\UserController@update')->name('admin.patients.update');
-Route::delete('/admin/patients/{id}', 'Admin\UserController@destroy')->name('admin.patients.destroy');
+Route::get('/admin/patients', 'Admin\PatientController@index')->name('admin.patients.index');
+Route::get('/admin/patients/create', 'Admin\PatientController@create')->name('admin.patients.create');
+Route::get('/admin/patients/{id}', 'Admin\PatientController@show')->name('admin.patients.show');
+Route::post('/admin/patients/store', 'Admin\PatientController@store')->name('admin.patients.store');
+Route::get('/admin/patients/{id}/edit', 'Admin\PatientController@edit')->name('admin.patients.edit');
+Route::put('/admin/patients/{id}', 'Admin\PatientController@update')->name('admin.patients.update');
+Route::delete('/admin/patients/{id}', 'Admin\PatientController@destroy')->name('admin.patients.destroy');
 
 Route::get('/admin/doctors', 'Admin\DoctorController@index')->name('admin.doctors.index');
 Route::get('/admin/doctors/create', 'Admin\DoctorController@create')->name('admin.doctors.create');
@@ -38,6 +41,4 @@ Route::get('/admin/doctors/{id}/edit', 'Admin\DoctorController@edit')->name('adm
 Route::put('/admin/doctors/{id}', 'Admin\DoctorController@update')->name('admin.doctors.update');
 Route::delete('/admin/doctors/{id}', 'Admin\DoctorController@destroy')->name('admin.doctors.destroy');
 
-// Route::get('/user/books', 'user\BookController@index')->name('user.books.index');
-// Route::get('/user/books/{id}', 'user\BookController@show')->name('user.books.show');
 

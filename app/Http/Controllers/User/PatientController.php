@@ -6,12 +6,12 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class PatientController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
-        // $this->middleware('role:user');
+        $this->middleware('role:patient');
     }
     
     public function index() {

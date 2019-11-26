@@ -3,15 +3,14 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Book;
+use App\User;
 
-class BookController extends Controller
+class DoctorController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
-        // $this->middleware('role:user');
+        $this->middleware('role:doctor');
     }
     /**
      * Display a listing of the resource.
@@ -20,10 +19,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        $books = Book::all();
-        return view('user.books.index')->with([
-            'books' => $books
-        ]);
+        return view('user.doctors.home');
     }
 
     /**
@@ -34,10 +30,10 @@ class BookController extends Controller
      */
     public function show($id)
     {
-        $book = Book::findOrFail($id);
+        $user = User::findOrFail($id);
 
-        return view('user.books.show')->with([
-            'book' => $book
+        return view('user.doctors.show')->with([
+            'user' => $user
         ]);
     }
 
