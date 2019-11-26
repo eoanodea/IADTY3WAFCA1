@@ -13,18 +13,17 @@ class CreateVisitsTable extends Migration
      */
     public function up()
     {
-        Schema::create('visit', function (Blueprint $table) {
+        Schema::create('visits', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('user_id')->unsigned();
-            $table->string('notes');
-            $table->integer('duration');
+            $table->string('notes', 255);
+            $table->float('duration');
             $table->timestamps();
             
             $table->bigInteger('doctor_id')->unsigned();
             $table->bigInteger('patient_id')->unsigned();
 
-            $table->foreign('doctor_id')->references('id')->on('doctors')->onUpdate('cascade')->onDelete('restrict');
-            $table->foreign('patient_id')->references('id')->on('patients')->onUpdate('cascade')->onDelete('restrict');
+            $table->foreign('doctor_id')->references('id')->on('doctors');
+            $table->foreign('patient_id')->references('id')->on('patients');
         });
     }
 

@@ -24,6 +24,8 @@ Route::get('/patient/{id}', 'User\PatientController@show')->name('patient.show')
 Route::get('/doctor/home', 'User\DoctorController@index')->name('doctor.home');
 Route::get('/doctor/{id}', 'User\DoctorController@show')->name('doctor.show');
 
+
+
 Route::get('/admin/home', 'Admin\HomeController@index')->name('admin.home');
 Route::get('/admin/patients', 'Admin\PatientController@index')->name('admin.patients.index');
 Route::get('/admin/patients/create', 'Admin\PatientController@create')->name('admin.patients.create');

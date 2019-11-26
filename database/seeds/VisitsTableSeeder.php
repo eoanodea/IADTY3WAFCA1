@@ -14,18 +14,27 @@ class VisitsTableSeeder extends Seeder
      */
     public function run()
     {
-        // $user_id = Role::where('name', 'admin')->first();
+        $faker = \Faker\Factory::create();
 
-        // $faker = \Faker\Factory::create();
+        $role_patient = Role::where('name', 'patient')->first();
+        $role_doctor = Role::where('name', 'doctor')->first();
 
-        // //Create a few articles in our DB
-        // for ($i = 0; $i < 50; $i++) {
-        //     $visit = new Visit();
+        foreach($role_patient->users as $user) {
+            $doctors = $role_doctor->users;
+            $doctor = $doctors[rand(0, count($doctors) -1)];
+            echo $doctor;
+            
+            // echo '\n single doctor';
+            // echo $doctor;
+            $visit = new Visit();
 
-        //     $visit->notes = $faker->paragraph;
-        //     $visit->duration = $faker->randomDigitNotNull;
-        //     $visit->user_id = $user_id;
-        //     $visit->save();
-        // }
+            $visit->notes = $faker->paragraph();
+            $visit->duration = $faker->randomFloat($nbMaxDecimals = NULL, $min = 5, $max = 180);
+
+            $visit->patient_id = $user->patient->id;
+            $visit->doctor_id = $doctor->doctor->id;
+
+            $visit->save();
+        }    
     }
 }
