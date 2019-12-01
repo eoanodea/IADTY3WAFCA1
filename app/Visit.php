@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Visit extends Model
 {
     public function patient() {
-        return $this->hasOne('App\Patient');
+        return $this->belongsTo('App\Patient');
     }
     public function doctor() {
-        return $this->hasOne('App\Doctor');
+        return $this->belongsTo('App\Doctor');
     }
 }

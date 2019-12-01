@@ -35,15 +35,18 @@
                     <ul class="navbar-nav mr-auto">
                         @if(Auth::user() && Auth::user()->hasRole('admin'))
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('admin.patients.index') }}">Patients</a>
+                                <a class="nav-link" href="{{ route('admin.doctors.index') }}">Doctors</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('admin.doctors.index') }}">Doctors</a>
+                                <a class="nav-link" href="{{ route('admin.patients.index') }}">Patients</a>
                             </li>    
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.visits.index') }}">Visits</a>
+                            </li>
                         @elseif(Auth::user() && Auth::user()->hasRole('doctor'))
-                            <p>Doctor</p>
+                            <li>Doctor</li>
                         @elseif(Auth::user() && Auth::user()->hasRole('patient'))
-                            <p>Patient</p>                 
+                            <li>Patient</li>                 
                         @endif
                     </ul>
 
