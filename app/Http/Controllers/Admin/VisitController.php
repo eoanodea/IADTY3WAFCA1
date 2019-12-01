@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Doctor;
 use App\Http\Controllers\Controller;
+use App\Patient;
 use App\Visit;
 use Illuminate\Http\Request;
 
@@ -34,7 +36,13 @@ class VisitController extends Controller
      */
     public function create()
     {
-        return view('admin.visits.create');
+        $patients = Patient::all();
+        $doctors = Doctor::all();
+
+        return view('admin.visits.create')->with([
+            'doctors' => $doctors,
+            'patients' => $patients
+        ]);
     }
 
     /**
@@ -72,9 +80,13 @@ class VisitController extends Controller
     public function edit($id)
     {
         $visit = Visit::findOrFail($id);
+        $patients = Patient::all();
+        $doctors = Doctor::all();
 
         return view('admin.visits.edit')->with([
-            'visit' => $visit
+            'visit' => $visit,
+            'doctor' => $doctors,
+            'patient' => $patients
         ]);
     }
 

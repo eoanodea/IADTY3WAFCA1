@@ -21,8 +21,32 @@
                             <form method="POST" action="{{ route('admin.visits.store') }}">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <div class="form-group">
-                                    <label for="first_name">First Name</label>
-                                    <input type="text" class="form-control" id="first_name" name="first_name" value="{{ old('first_name') }}"/>
+                                    <label for="doctor">Doctor</label>
+                                    <br />
+                                    <select name="doctor_id">
+                                        @foreach ($doctors as $doctor)
+                                            <option 
+                                                value={{ $doctor->id }} 
+                                                {{ (old('doctor_id') == $doctor->id) 
+                                                    ? "selected" 
+                                                    : "" }}
+                                            >{{ $doctor->user->first_name }} {{ $doctor->user->last_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="patient">Patient</label>
+                                    <br />
+                                    <select name="patient_id">
+                                        @foreach ($patients as $patient)
+                                            <option 
+                                                value={{ $patient->id }} 
+                                                {{ (old('patient_id') == $patient->id) 
+                                                    ? "selected" 
+                                                    : "" }}
+                                            >{{ $patient->user->first_name }} {{ $patient->user->last_name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="last_name">Last Name</label>
