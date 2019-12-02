@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Doctor;
 use App\Http\Controllers\Controller;
+use App\Role;
 use App\User;
 use App\Visit;
 use Illuminate\Http\Request;
@@ -83,9 +84,7 @@ class DoctorController extends Controller
 
         $doctor->save();
 
-        return view('admin.doctors.show')->with([
-            'user' => $user
-        ]);
+        return redirect()->route('admin.doctors.show', $user->id);
     }
 
 
@@ -160,9 +159,7 @@ class DoctorController extends Controller
         $user->doctor->save();
 
 
-        return view('admin.doctors.show')->with([
-            'user' => $user
-        ]);
+        return redirect()->route('admin.doctors.show', $user->id);
     }
 
     /**
