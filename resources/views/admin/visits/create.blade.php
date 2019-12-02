@@ -49,30 +49,14 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="last_name">Last Name</label>
-                                    <input type="text" class="form-control" id="last_name" name="last_name" value="{{ old('last_name') }}"/>
+                                    <label for="duration">Duration (Minutes)</label>
+                                    <input type="number" class="form-control" id="duration" name="duration" value="{{ old('duration') }}"/>
                                 </div>
                                 <div class="form-group">
-                                    <label for="email">Email</label>
-                                    <input type="text" class="form-control" id="email" name="email" value="{{ old('email') }}"/>
+                                    <label for="notes">Notes</label>
+                                    <textarea class="form-control" id="notes" name="notes" value="{{ old('notes') }}"></textarea>
                                 </div>
-                                <div class="form-group">
-                                    <label for="password">Password</label>
-                                    <input type="password" class="form-control" id="password" name="password" value="{{ old('password') }}"/>
-                                </div>
-                                <div class="form-group">
-                                    <label for="mobile_number">Mobile</label>
-                                    <input type="text" class="form-control" id="mobile_number" name="mobile_number" value="{{ old('mobile_number') }}"/>
-                                </div>
-                                <div class="form-group">
-                                    <label for="address">Address</label>
-                                    <input type="text" class="form-control" id="address" name="address" value="{{ old('address') }}"/>
-                                </div>
-                                <div class="form-group">
-                                    <label for="date_started">Date Started</label>
-                                    <input type="date" class="form-control" id="date_started" name="date_started" value="{{ old('date_started') }}"/>
-                                </div>
-                                
+
                                 <a href="{{ route('admin.visits.index') }}" class="btn btn-link">Cancel</a>
                                 <button type="submit" class="btn btn-primary float-right">Submit</button>
                             </form>

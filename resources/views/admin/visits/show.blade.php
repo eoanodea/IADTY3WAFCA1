@@ -22,7 +22,7 @@
                                         </tr>
                                         <tr>
                                             <td>Duration</td>
-                                            <td>{{ $visit->duration}}</td>
+                                            <td>{{ $visit->duration}} minutes</td>
                                         </tr>
                                         <tr>
                                             <td>Notes</td>
@@ -34,7 +34,7 @@
                             <a href="{{ route('admin.visits.edit', $visit->id) }}" class="btn btn-warning">Edit</a>
                             <form style="display:inline-block" method="POST" action="{{ route('admin.visits.destroy', $visit->id) }}">
                                 <input type="hidden" name="_method" value="DELETE">
-                                <input type="hidden" name="token" value="{{ csrf_token() }}">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <button type="submit" class="form-control btn btn-danger">Delete</button>
                             </form>
                         

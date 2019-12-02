@@ -29,7 +29,7 @@ class VisitsTableSeeder extends Seeder
             $visit = new Visit();
             //Populate visit with faker data
             $visit->notes = $faker->paragraph();
-            $visit->duration = $faker->randomFloat($nbMaxDecimals = NULL, $min = 5, $max = 180);
+            $visit->duration = $faker->numberBetween($min = 5, $max = 180);
             //Assign foreign keys to visit
             $visit->patient_id = $user->patient->id;
             $visit->doctor_id = $doctor->doctor->id;

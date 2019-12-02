@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Doctor;
 use App\Http\Controllers\Controller;
 use App\User;
+use App\Visit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -97,9 +98,18 @@ class DoctorController extends Controller
     public function show($id)
     {
         $user = User::findOrFail($id);
+        $visits = Visit::all();
+        $returnedVisits = array();
+
+        foreach($visits as $visit) {
+            if($user->doctor->id == $visit->doctor_id) {
+                array_push($returnedVisits, $visit);
+            }
+        }
 
         return view('admin.doctors.show')->with([
-            'user' => $user
+            'user' => $user,
+            'visits' => $returnedVisits
         ]);
     }
 

@@ -22,28 +22,40 @@
                                 <input type="hidden" name="_method" value="PUT">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <div class="form-group">
-                                    <label for="first_name">First Name</label>
-                                    <input type="text" class="form-control" id="first_name" name="first_name" value="{{ old('first_name', $visit->first_name) }}"/>
+                                    <label for="doctor">Doctor</label>
+                                    <br />
+                                    <select name="doctor_id">
+                                        @foreach ($doctors as $doctor)
+                                            <option 
+                                                value={{ $doctor->id }} 
+                                                {{ (old('doctor_id', $visit->doctor_id) == $doctor->id) 
+                                                    ? "selected" 
+                                                    : "" }}
+                                            >{{ $doctor->user->first_name }} {{ $doctor->user->last_name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="last_name">Last Name</label>
-                                    <input type="text" class="form-control" id="last_name" name="last_name" value="{{ old('last_name', $visit->last_name) }}"/>
+                                    <label for="patient">Patient</label>
+                                    <br />
+                                    <select name="patient_id">
+                                        @foreach ($patients as $patient)
+                                            <option 
+                                                value={{ $patient->id }} 
+                                                {{ (old('patient_id', $visit->patient_id) == $patient->id) 
+                                                    ? "selected" 
+                                                    : "" }}
+                                            >{{ $patient->user->first_name }} {{ $patient->user->last_name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="email">Email</label>
-                                    <input type="email" class="form-control" id="email" name="email" value="{{ old('email', $visit->email) }}"/>
+                                    <label for="duration">Duration (Minutes)</label>
+                                    <input type="number" class="form-control" id="duration" name="duration" value="{{ old('duration', $visit->duration) }}"/>
                                 </div>
                                 <div class="form-group">
-                                    <label for="mobile_number">Mobile</label>
-                                    <input type="text" class="form-control" id="mobile_number" name="mobile_number" value="{{ old('mobile_number', $visit->mobile_number) }}"/>
-                                </div>
-                                <div class="form-group">
-                                    <label for="address">Address</label>
-                                    <input type="text" class="form-control" id="address" name="address" value="{{ old('address', $visit->address) }}"/>
-                                </div>
-                                <div class="form-group">
-                                    <label for="date_started">Date Started</label>
-                                    <input type="date" class="form-control" id="date_started" name="date_started" value="{{ old('date_started', $visit->visit->date_started) }}"/>
+                                    <label for="notes">Notes</label>
+                                    <textarea class="form-control" id="notes" name="notes" >{{ old('notes', $visit->notes) }}</textarea>
                                 </div>
                                 <a href="{{ route('admin.visits.index') }}" class="btn btn-link">Cancel</a>
                                 <button type="submit" class="btn btn-primary float-right">Submit</button>

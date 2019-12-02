@@ -16,7 +16,7 @@ class CreateVisitsTable extends Migration
         Schema::create('visits', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('notes', 255);
-            $table->float('duration');
+            $table->integer('duration');
             $table->timestamps();
             
             $table->bigInteger('doctor_id')->unsigned();

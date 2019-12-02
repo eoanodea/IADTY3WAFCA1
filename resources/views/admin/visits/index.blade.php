@@ -24,9 +24,9 @@
                                     
                                     @foreach ($visits as $visit)
                                         <tr data-id="{{ $visit->id }}">
-                                            <td>{{ $visit->doctor->user->first_name }} {{ $visit->doctor->user->last_name }} </td>
-                                            <td>{{ $visit->patient->user->first_name }} {{ $visit->patient->user->last_name }} </td>
-                                            <td>{{ $visit->duration}}</td>
+                                            <td><a href="{{ route('admin.doctors.show', $visit->doctor->id) }}">{{ $visit->doctor->user->first_name }} {{ $visit->doctor->user->last_name }} </a></td>
+                                            <td><a href="{{ route('admin.patients.show', $visit->patient->id) }}">{{ $visit->patient->user->first_name }} {{ $visit->patient->user->last_name }} </a></td>
+                                            <td>{{ $visit->duration}} minutes</td>
                                             <td>
                                                 <a href="{{ route('admin.visits.show', $visit->id) }}" class="btn btn-default">View</a>
                                                 <a href="{{ route('admin.visits.edit', $visit->id) }}" class="btn btn-warning">Edit</a>

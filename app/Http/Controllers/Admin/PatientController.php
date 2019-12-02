@@ -7,6 +7,7 @@ use App\Patient;
 use App\Role;
 use Illuminate\Http\Request;
 use App\User;
+use App\Visit;
 use Illuminate\Support\Facades\Hash;
 
 class PatientController extends Controller
@@ -56,9 +57,18 @@ class PatientController extends Controller
      */
     public function show($id) {
         $user = User::findOrFail($id);
+        $visits = Visit::all();
+        $returnedVisits = array();
+
+        foreach($visits as $visit) {
+            if($user->patient->id == $visit->patient_id) {
+                array_push($returnedVisits, $visit);
+            }
+        }
         
         return view('admin.patients.show')->with([
-            'user' => $user
+            'user' => $user,
+            'visits' => $returnedVisits
         ]);
     }
 

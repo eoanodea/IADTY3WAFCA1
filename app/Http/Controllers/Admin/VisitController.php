@@ -53,7 +53,24 @@ class VisitController extends Controller
      */
     public function store(Request $request)
     {
-    
+        $request->validate([
+            'duration' => 'required|integer',
+            'notes' => 'required|string',
+            'doctor_id' => 'required|integer',
+            'patient_id' => 'required|integer'
+        ]);
+
+        $visit = new Visit();
+        $visit->duration = $request->input('duration');
+        $visit->notes = $request->input('notes');
+        $visit->doctor_id = $request->input('doctor_id');
+        $visit->patient_id = $request->input('patient_id');
+        
+        $visit->save();
+
+        return view('admin.visits.show')->with([
+            'visit' => $visit
+        ]);
     }
 
     /**
@@ -64,10 +81,10 @@ class VisitController extends Controller
      */
     public function show($id)
     {
-        $visits = Visit::findOrFail($id);
+        $visit = Visit::findOrFail($id);
 
         return view('admin.visits.show')->with([
-            'visit' => $visits
+            'visit' => $visit
         ]);
     }
 
@@ -85,8 +102,8 @@ class VisitController extends Controller
 
         return view('admin.visits.edit')->with([
             'visit' => $visit,
-            'doctor' => $doctors,
-            'patient' => $patients
+            'doctors' => $doctors,
+            'patients' => $patients
         ]);
     }
 
@@ -99,7 +116,25 @@ class VisitController extends Controller
      */
     public function update(Request $request, $id)
     {
-    
+        $visit = Visit::findOrFail($id);
+
+        $request->validate([
+            'duration' => 'required|integer',
+            'notes' => 'required|string',
+            'doctor_id' => 'required|integer',
+            'patient_id' => 'required|integer'
+        ]);
+
+        $visit->duration = $request->input('duration');
+        $visit->notes = $request->input('notes');
+        $visit->doctor_id = $request->input('doctor_id');
+        $visit->patient_id = $request->input('patient_id');
+        
+        $visit->save();
+
+        return view('admin.visits.show')->with([
+            'visit' => $visit
+        ]);
     }
 
     /**
