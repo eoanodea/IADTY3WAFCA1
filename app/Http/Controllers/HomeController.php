@@ -29,7 +29,7 @@ class HomeController extends Controller
         if ($user->hasRole('admin')) {
             $home = 'admin.home';
         } else if($user->hasRole('doctor')) {
-            $home = 'doctor.home';
+            $home = 'doctor.doctors.index';
         } else if($user->hasRole('patient')) {
             $home = 'patient.home';
         }

@@ -14,13 +14,13 @@ class PatientController extends Controller
     }
     
     public function index() {
-        return view('user.patients.home');
+        return view('doctor.patients.index');
     }
 
     public function show($id) {
         $user = User::findOrFail($id);
 
-        return view('user.patients.show')->with([
+        return view('doctor.patients.show')->with([
             'user' => $user
         ]);
     }

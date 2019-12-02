@@ -18,13 +18,24 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/patient/home', 'User\PatientController@index')->name('patient.home');
-Route::get('/patient/{id}', 'User\PatientController@show')->name('patient.show');
+Route::get('/doctor/patient', 'Doctor\PatientController@index')->name('doctor.patients.index');
+Route::get('/doctor/patient/{id}', 'Doctor\PatientController@show')->name('doctor.patients.show');
+Route::get('/doctor/patients/create', 'Doctor\PatientController@create')->name('doctor.patients.create');
+Route::post('/doctor/patients/store', 'Doctor\PatientController@store')->name('doctor.patients.store');
+Route::get('/doctor/patients/{id}/edit', 'Doctor\PatientController@edit')->name('doctor.patients.edit');
+Route::put('/doctor/patients/{id}', 'Doctor\PatientController@update')->name('doctor.patients.update');
+Route::delete('/doctor/patients/{id}', 'Doctor\PatientController@destroy')->name('doctor.patients.destroy');
 
-Route::get('/doctor/home', 'User\DoctorController@index')->name('doctor.home');
-Route::get('/doctor/{id}', 'User\DoctorController@show')->name('doctor.show');
+Route::get('/doctor', 'Doctor\DoctorController@index')->name('doctor.doctors.index');
+Route::get('/doctor/{id}', 'Doctor\DoctorController@show')->name('doctor.doctors.show');
 
-
+Route::get('/doctor/visits/all', 'Doctor\VisitController@index')->name('doctor.visits.index');
+Route::get('/doctor/visits/create', 'Doctor\VisitController@create')->name('doctor.visits.create');
+Route::get('/doctor/visits/{id}', 'Doctor\VisitController@show')->name('doctor.visits.show');
+Route::post('/doctor/visits/store', 'Doctor\VisitController@store')->name('doctor.visits.store');
+Route::get('/doctor/visits/{id}/edit', 'Doctor\VisitController@edit')->name('doctor.visits.edit');
+Route::put('/doctor/visits/{id}', 'Doctor\VisitController@update')->name('doctor.visits.update');
+Route::delete('/doctor/visits/{id}', 'Doctor\VisitController@destroy')->name('doctor.visits.destroy');
 
 Route::get('/admin/home', 'Admin\HomeController@index')->name('admin.home');
 Route::get('/admin/patients', 'Admin\PatientController@index')->name('admin.patients.index');

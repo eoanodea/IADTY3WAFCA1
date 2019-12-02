@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\Doctor;
 
 use App\Http\Controllers\Controller;
 use App\User;
+use App\Visit;
 
 class DoctorController extends Controller
 {
@@ -19,7 +20,7 @@ class DoctorController extends Controller
      */
     public function index()
     {
-        return view('user.doctors.home');
+        return view('doctor.doctors.home');
     }
 
     /**
@@ -31,9 +32,18 @@ class DoctorController extends Controller
     public function show($id)
     {
         $user = User::findOrFail($id);
+        $visits = Visit::all();
+        $returnedVisits = array();
 
-        return view('user.doctors.show')->with([
-            'user' => $user
+        foreach($visits as $visit) {
+            if($user->doctor->id == $visit->doctor_id) {
+                array_push($returnedVisits, $visit);
+            }
+        }
+
+        return view('doctor.doctors.show')->with([
+            'user' => $user,
+            'visits' => $returnedVisits
         ]);
     }
 

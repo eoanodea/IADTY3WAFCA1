@@ -16,7 +16,7 @@
 
                     You are logged in as a Doctor!
                     <br />
-                    <a class="btn btn-primary"href="{{ route('doctor.show', Auth::user()->id) }}">View Profile</a>
+                    <a class="btn btn-primary"href="{{ route('doctor.doctors.show', Auth::user()->id) }}">View Profile</a>
                 </div>
             </div>
         </div>

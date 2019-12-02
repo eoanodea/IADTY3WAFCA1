@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-6">
             <div class="card">
                     <div class="card-header">
                         Doctor: {{ $user->first_name }} {{ $user->last_name }}
@@ -40,11 +40,40 @@
                                     @endif
                                     </tbody>
                             </table>
-                            <a href="{{ route('doctor.home') }}" class="btn btn-secondary">Back</a>
-                        
                     </div>
             </div>
         </div>
+        <div class="col-md-6">
+                <div class="card">
+                        <div class="card-header">
+                            Visit Log
+                        </div>
+                        <div class="card-body">
+                            @if (count($visits) === 0)
+                                <p>No visits available</p>
+                            @else
+                            <table id="table-visits" class="table table-hover">
+                                <thead>
+                                    <th>Date</th>
+                                    <th>Patient</th>
+                                    <th>Duration</th>
+                                    <th>Actions</th>
+                                </thead>
+                                <tbody>
+                                    @foreach ($visits as $visit)
+                                            <tr data-id="{{ $visit->id }}">
+                                                <td>{{ $visit->created_at }}</td>
+                                                <td><a href="{{ route('doctor.patients.show', $visit->patient->user->id) }}">{{ $visit->patient->user->first_name }} {{ $visit->patient->user->last_name }} </a></td>
+                                                <td>{{ $visit->duration}} minutes</td>
+                                                <td><a href="{{ route('doctor.visits.show', $visit->id) }}" class="btn btn-primary">View</a></td>
+                                            </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            @endif                    
+                        </div>
+                </div>
+            </div>
     </div>
 </div>
 

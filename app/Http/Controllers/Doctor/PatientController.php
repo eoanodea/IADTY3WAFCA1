@@ -1,31 +1,24 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Doctor;
 
 use App\Http\Controllers\Controller;
 use App\Patient;
 use App\Role;
-use Illuminate\Http\Request;
 use App\User;
 use App\Visit;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class PatientController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('role:admin');
+        $this->middleware('role:doctor');
     }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
+    
+    public function index() {
         $users = User::all();
         $returnedUsers = array();
 
@@ -35,26 +28,11 @@ class PatientController extends Controller
             }
         }
 
-        return view('admin.patients.index')->with([
+        return view('doctor.patients.index')->with([
             'users' => $returnedUsers
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('admin.patients.create');
-    }
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id) {
         $user = User::findOrFail($id);
         $visits = Visit::all();
@@ -65,12 +43,23 @@ class PatientController extends Controller
                 array_push($returnedVisits, $visit);
             }
         }
-        
-        return view('admin.patients.show')->with([
+
+        return view('doctor.patients.show')->with([
             'user' => $user,
             'visits' => $returnedVisits
         ]);
     }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('doctor.patients.create');
+    }
+   
 
     public function store(Request $request)
     {
@@ -106,9 +95,7 @@ class PatientController extends Controller
         $patient->user_id = $user->id;
         $patient->save();
         
-        return view('admin.patients.show')->with([
-            'user' => $user
-        ]);
+        return redirect()->route('doctor.patients.show', $user->id);
     }
 
     /**
@@ -121,7 +108,7 @@ class PatientController extends Controller
     {
         $user = User::findOrFail($id);
 
-        return view('admin.patients.edit')->with([
+        return view('doctor.patients.edit')->with([
             'user' => $user
         ]);
     }
@@ -166,9 +153,7 @@ class PatientController extends Controller
         $user->save();
         $user->patient->save();
 
-        return view('admin.patients.show')->with([
-            'user' => $user
-        ]);
+        return redirect()->route('doctor.patients.show', $user->id);
     }
 
     /**
@@ -182,7 +167,6 @@ class PatientController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
 
-        return redirect()->route('admin.patients.index');
+        return redirect()->route('doctor.patients.index');
     }
-
 }

@@ -44,7 +44,15 @@
                                 <a class="nav-link" href="{{ route('admin.visits.index') }}">Visits</a>
                             </li>
                         @elseif(Auth::user() && Auth::user()->hasRole('doctor'))
-                            <li>Doctor</li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('doctor.doctors.show', Auth::user()->id) }}">Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('doctor.patients.index') }}">Patients</a>
+                                </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('doctor.visits.index') }}">Visits</a>
+                            </li>
                         @elseif(Auth::user() && Auth::user()->hasRole('patient'))
                             <li>Patient</li>                 
                         @endif
