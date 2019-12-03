@@ -6,7 +6,7 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="card">
                     <div class="card-header">
-                        Visit
+                        Visit @if($visit->cancelled) <span class="badge badge-danger float-right" style="padding: 10px;margin: 0 5px">CANCELLED</span> @endif
                     </div>
                     <div class="card-body">
                         
@@ -39,12 +39,16 @@
                                     </tbody>
                             </table>
                             <a href="{{ route('admin.visits.index', $visit->id) }}" class="btn btn-default">Back</a>
-                            <a href="{{ route('admin.visits.edit', $visit->id) }}" class="btn btn-warning">Edit</a>
-                            <form style="display:inline-block" method="POST" action="{{ route('admin.visits.destroy', $visit->id) }}">
+                            
+                            <form style="display:inline-block;float: right;margin: 0 5px;" method="POST" action="{{ route('admin.visits.destroy', $visit->id) }}">
                                 <input type="hidden" name="_method" value="DELETE">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                <button type="submit" class="form-control btn btn-danger">Delete</button>
+                                <button type="submit" class="form-control btn btn-danger float-right">Delete</button>
                             </form>
+
+                            <a href="{{ route('admin.visits.edit', $visit->id) }}" class="btn btn-warning float-right">Edit</a>
+
+                            @if(!$visit->cancelled && $visit->date > date('Y-m-d')) <a href="{{ route('admin.visits.cancel', $visit->id) }}" class="btn btn-danger float-right" style="margin: 0 5px">Cancel Visit</a> @endif
                         
                     </div>
             </div>

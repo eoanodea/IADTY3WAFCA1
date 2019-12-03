@@ -25,7 +25,7 @@
                                     
                                     @foreach ($visits as $visit)
                                         <tr data-id="{{ $visit->id }}">
-                                            <td>{{ $visit->date }}</td>
+                                            <td>{{ $visit->date }}@if($visit->cancelled) <span class="badge badge-danger" style="padding: 10px;margin: 0 5px">CANCELLED</span> @endif</td>
                                             <td><a href="{{ route('doctor.doctors.show', $visit->doctor->user->id) }}">{{ $visit->doctor->user->first_name }} {{ $visit->doctor->user->last_name }} </a></td>
                                             <td><a href="{{ route('doctor.patients.show', $visit->patient->user->id) }}">{{ $visit->patient->user->first_name }} {{ $visit->patient->user->last_name }} </a></td>
                                             <td>{{ $visit->duration}} minutes</td>
@@ -38,7 +38,6 @@
                                                 <button type="submit" class="form-control btn btn-danger">Delete</button>
                                             </form>
                                             </td>
-                                        
                                         </tr>
                                     @endforeach
                                 </tbody>

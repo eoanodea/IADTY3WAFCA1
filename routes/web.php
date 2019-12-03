@@ -43,6 +43,7 @@ Route::post('/doctor/visits/store', 'Doctor\VisitController@store')->name('docto
 Route::get('/doctor/visits/{id}/edit', 'Doctor\VisitController@edit')->name('doctor.visits.edit');
 Route::put('/doctor/visits/{id}', 'Doctor\VisitController@update')->name('doctor.visits.update');
 Route::delete('/doctor/visits/{id}', 'Doctor\VisitController@destroy')->name('doctor.visits.destroy');
+Route::get('/doctor/visits/cancel/{id}', 'Doctor\VisitController@cancel')->name('doctor.visits.cancel');
 
 Route::get('/admin/home', 'Admin\HomeController@index')->name('admin.index');
 Route::get('/admin/patients', 'Admin\PatientController@index')->name('admin.patients.index');
@@ -68,3 +69,4 @@ Route::post('/admin/visits/store', 'Admin\VisitController@store')->name('admin.v
 Route::get('/admin/visits/{id}/edit', 'Admin\VisitController@edit')->name('admin.visits.edit');
 Route::put('/admin/visits/{id}', 'Admin\VisitController@update')->name('admin.visits.update');
 Route::delete('/admin/visits/{id}', 'Admin\VisitController@destroy')->name('admin.visits.destroy');
+Route::get('/admin/visits/cancel/{id}', 'Admin\VisitController@cancel')->name('admin.visits.cancel');

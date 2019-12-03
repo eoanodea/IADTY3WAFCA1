@@ -67,7 +67,7 @@
                                     <th>Date</th>
                                     <th>Doctor</th>
                                     <th>Duration</th>
-                                    <th>Actions</th>
+                                    <th></th>
                                 </thead>
                                 <tbody>
                                     @foreach ($visits as $visit)
@@ -75,7 +75,12 @@
                                                 <td>{{ $visit->date }}</td>
                                                 <td>Dr. {{ $visit->doctor->user->first_name }} {{ $visit->doctor->user->last_name }}</td>
                                                 <td>{{ $visit->duration}} minutes</td>
-                                                <td><a href="{{ route('patient.visits.show', $visit->id) }}" class="btn btn-primary">View</a></td>
+                                                <td>
+                                                        @if($visit->cancelled) <span class="badge badge-danger" style="padding: 10px;margin: 0 5px">CANCELLED</span> 
+                                                        @else <a href="{{ route('patient.visits.show', $visit->id) }}" class="btn btn-primary">View</a>
+                                                        @endif
+                                                    
+                                                </td>
                                             </tr>
                                     @endforeach
                                 </tbody>

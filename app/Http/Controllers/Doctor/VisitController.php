@@ -79,6 +79,8 @@ class VisitController extends Controller
         $request->validate([
             'duration' => 'required|integer',
             'notes' => 'required|string',
+            'date' => 'required|date',
+            'time' => 'required',
             'doctor_id' => 'required|integer',
             'patient_id' => 'required|integer'
         ]);
@@ -86,6 +88,8 @@ class VisitController extends Controller
         $visit = new Visit();
         $visit->duration = $request->input('duration');
         $visit->notes = $request->input('notes');
+        $visit->date = $request->input('date');
+        $visit->time = $request->input('time');
         $visit->doctor_id = $request->input('doctor_id');
         $visit->patient_id = $request->input('patient_id');
         
@@ -129,12 +133,16 @@ class VisitController extends Controller
         $request->validate([
             'duration' => 'required|integer',
             'notes' => 'required|string',
+            'date' => 'required|date',
+            'time' => 'required',
             'doctor_id' => 'required|integer',
             'patient_id' => 'required|integer'
         ]);
 
         $visit->duration = $request->input('duration');
         $visit->notes = $request->input('notes');
+        $visit->date = $request->input('date');
+        $visit->time = $request->input('time');
         $visit->doctor_id = $request->input('doctor_id');
         $visit->patient_id = $request->input('patient_id');
         
@@ -157,5 +165,20 @@ class VisitController extends Controller
         $visit->delete();
 
         return redirect()->route('doctor.visits.index');
+    }
+
+    /**
+     * Cancel the Visit
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function cancel($id) {
+
+        $visit = Visit::findOrFail($id);
+        $visit->cancelled = true;
+        $visit->save();
+        
+        return redirect()->route('doctor.visits.show', $visit->id);
     }
 }

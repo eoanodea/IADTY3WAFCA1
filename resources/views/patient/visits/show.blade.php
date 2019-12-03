@@ -6,7 +6,7 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="card">
                     <div class="card-header">
-                        Visit @if($visit->cancelled) (Cancelled) @endif
+                        Visit @if($visit->cancelled) <span class="badge badge-danger float-right" style="padding: 10px;margin: 0 5px">CANCELLED</span> @endif
                     </div>
                     <div class="card-body">
                         
