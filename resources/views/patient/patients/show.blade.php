@@ -44,7 +44,7 @@
                                         @else 
                                             <tr>
                                                 <td>Insurance Details</td>
-                                                <td>User has no insurance</td>
+                                                <td>You have no insurance</td>
                                             </tr>
                                         @endif
                                     </tbody>
@@ -56,8 +56,7 @@
         <div class="col-md-6">
                 <div class="card">
                         <div class="card-header">
-                            Visit Log
-                            {{-- <a href={{ route('patient.visits.create', $user->id) }} class="btn btn-primary float-right">Add Visit</a> --}}
+                            Visits
                         </div>
                         <div class="card-body">
                             @if (count($visits) === 0)

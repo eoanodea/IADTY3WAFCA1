@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Patient;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Visit;
+use Auth;
 
 class PatientController extends Controller
 {
@@ -18,8 +19,9 @@ class PatientController extends Controller
         return view('patient.patients.home');
     }
 
-    public function show($id) {
-        $user = User::findOrFail($id);
+    public function show() {
+        $userId = Auth::user()->id;
+        $user = User::findOrFail($userId);
         $visits = Visit::orderBy('date', 'DESC')->get();
         $returnedVisits = array();
 

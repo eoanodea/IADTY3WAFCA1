@@ -6,7 +6,7 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="card">
                     <div class="card-header">
-                        Visit
+                        Visit @if($visit->cancelled) (Cancelled) @endif
                     </div>
                     <div class="card-body">
                         
@@ -32,13 +32,10 @@
                                             <td>Duration</td>
                                             <td>{{ $visit->duration}} minutes</td>
                                         </tr>
-                                        <tr>
-                                            <td>Date</td>
-                                            <td>{{ $visit->created_at }}</td>
-                                        </tr>
                                     </tbody>
                             </table>
                             <a href="{{ route('patient.patients.show', $visit->patient->user->id) }}" class="btn btn-default">Back</a>
+                            @if(!$visit->cancelled && $visit->date > date('Y-m-d')) <a href="{{ route('patient.visits.cancel', $visit->id) }}" class="btn btn-danger float-right">Cancel Visit</a> @endif
                         
                     </div>
             </div>

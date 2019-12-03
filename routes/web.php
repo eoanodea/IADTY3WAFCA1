@@ -19,8 +19,9 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/patient', 'Patient\PatientController@index')->name('patient.patients.index');
-Route::get('/patient/{id}', 'Patient\PatientController@show')->name('patient.patients.show');
+Route::get('/patient/profile', 'Patient\PatientController@show')->name('patient.patients.show');
 Route::get('/patient/visits/{id}', 'Patient\VisitController@show')->name('patient.visits.show');
+Route::get('/patient/visits/cancel/{id}', 'Patient\VisitController@cancel')->name('patient.visits.cancel');
 
 Route::get('/doctor/patient', 'Doctor\PatientController@index')->name('doctor.patients.index');
 Route::get('/doctor/patient/{id}', 'Doctor\PatientController@show')->name('doctor.patients.show');

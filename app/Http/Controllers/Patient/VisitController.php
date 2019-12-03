@@ -28,4 +28,19 @@ class VisitController extends Controller
             'visit' => $visit
         ]);
     }
+
+    /**
+     * Cancel the Visit
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function cancel($id) {
+
+        $visit = Visit::findOrFail($id);
+        $visit->cancelled = true;
+        $visit->save();
+        
+        return redirect()->route('patient.visits.show', $visit->id);
+    }
 }
