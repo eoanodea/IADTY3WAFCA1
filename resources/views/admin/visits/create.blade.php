@@ -27,7 +27,7 @@
                                         @foreach ($doctors as $doctor)
                                             <option 
                                                 value={{ $doctor->id }} 
-                                                {{ (old('doctor_id') == $doctor->id|| Auth::user()->id == $doctor->user->id) 
+                                                {{ (old('doctor_id') == $doctor->id) 
                                                     ? "selected" 
                                                     : "" }}
                                             >{{ $doctor->user->first_name }} {{ $doctor->user->last_name }}</option>

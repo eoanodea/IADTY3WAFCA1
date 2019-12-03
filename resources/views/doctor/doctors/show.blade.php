@@ -7,9 +7,9 @@
             <div class="card">
                     <div class="card-header">
                         Doctor: {{ $user->first_name }} {{ $user->last_name }}
+                        <a href={{ route('doctor.doctors.edit', $user->id) }} class="btn btn-primary float-right">Edit</a>
                     </div>
                     <div class="card-body">
-                        
                             <table id="table-books" class="table table-hover">
                                 <tbody>
                                     <tr>
@@ -47,6 +47,7 @@
                 <div class="card">
                         <div class="card-header">
                             Visit Log
+                            <a href={{ route('doctor.visits.create') }} class="btn btn-primary float-right">Add Visit</a>
                         </div>
                         <div class="card-body">
                             @if (count($visits) === 0)

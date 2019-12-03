@@ -1,10 +1,10 @@
 <?php
-
 namespace App\Http\Controllers\Doctor;
 
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Visit;
+use Illuminate\Http\Request;
 
 class DoctorController extends Controller
 {
@@ -46,5 +46,56 @@ class DoctorController extends Controller
             'visits' => $returnedVisits
         ]);
     }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $user = User::findOrFail($id);
+
+        return view('doctor.doctors.edit')->with([
+            'user' => $user
+        ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+
+        $request->validate([
+            'first_name' => 'required|max:191',
+            'last_name' => 'required|max:191',
+            'email' => 'required|email|unique:users,email,'.$id.'|max:191',
+            'password' => 'min:8',
+            'address' => 'required|max:255|string',
+            'mobile_number' => 'required|max:191|string',
+            'date_started' => 'required|date'
+        ]);
+
+        $user->first_name = $request->input('first_name');
+        $user->last_name = $request->input('last_name');
+        $user->email = $request->input('email');
+        $user->mobile_number = $request->input('mobile_number');
+        $user->address = $request->input('address');
+        $user->doctor->date_started = $request->input('date_started');
+
+        $user->save();
+        $user->doctor->save();
+
+
+        return redirect()->route('doctor.doctors.show', $user->id);
+    }
+
 
 }

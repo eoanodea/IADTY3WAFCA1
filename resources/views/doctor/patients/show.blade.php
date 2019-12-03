@@ -63,6 +63,7 @@
                 <div class="card">
                         <div class="card-header">
                             Visit Log
+                            <a href={{ route('doctor.visits.create', $user->id) }} class="btn btn-primary float-right">Add Visit</a>
                         </div>
                         <div class="card-body">
                             @if (count($visits) === 0)

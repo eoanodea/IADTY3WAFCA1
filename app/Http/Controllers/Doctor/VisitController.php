@@ -52,14 +52,19 @@ class VisitController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($patientId)
     {
         $patients = Patient::all();
         $doctors = Doctor::all();
 
+        if($patientId) return view('doctor.visits.create')->with([
+            'doctors' => $doctors,
+            'patients' => $patients,
+            'patientId' => $patientId
+        ]);
         return view('doctor.visits.create')->with([
             'doctors' => $doctors,
-            'patients' => $patients
+            'patients' => $patients,
         ]);
     }
 

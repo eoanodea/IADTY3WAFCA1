@@ -27,10 +27,10 @@
                                         @foreach ($doctors as $doctor)
                                             <option 
                                                 value={{ $doctor->id }} 
-                                                {{ (old('doctor_id') == $doctor->id) 
+                                                {{ (old('doctor_id') == $doctor->id) || (Auth::user()->id === $doctor->user->id) 
                                                     ? "selected" 
                                                     : "" }}
-                                            >{{ $doctor->user->first_name }} {{ $doctor->user->last_name }}</option>
+                                            >{{ $doctor->user->first_name }} {{ $doctor->user->last_name }} @if(Auth::user()->id === $doctor->user->id) (You) @endif</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -41,7 +41,7 @@
                                         @foreach ($patients as $patient)
                                             <option 
                                                 value={{ $patient->id }} 
-                                                {{ (old('patient_id') == $patient->id) 
+                                                {{ (old('patient_id') == $patient->id || ($patientId && $patientId == $patient->user->id) ) 
                                                     ? "selected" 
                                                     : "" }}
                                             >{{ $patient->user->first_name }} {{ $patient->user->last_name }}</option>
