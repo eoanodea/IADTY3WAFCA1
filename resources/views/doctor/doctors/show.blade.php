@@ -63,7 +63,7 @@
                                 <tbody>
                                     @foreach ($visits as $visit)
                                             <tr data-id="{{ $visit->id }}">
-                                                <td>{{ $visit->created_at }}</td>
+                                                <td>{{ $visit->date }}</td>
                                                 <td><a href="{{ route('doctor.patients.show', $visit->patient->user->id) }}">{{ $visit->patient->user->first_name }} {{ $visit->patient->user->last_name }} </a></td>
                                                 <td>{{ $visit->duration}} minutes</td>
                                                 <td><a href="{{ route('doctor.visits.show', $visit->id) }}" class="btn btn-primary">View</a></td>

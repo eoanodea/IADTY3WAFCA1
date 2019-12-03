@@ -57,7 +57,7 @@ class PatientController extends Controller
      */
     public function show($id) {
         $user = User::findOrFail($id);
-        $visits = Visit::all();
+        $visits = Visit::orderBy('date', 'DESC')->get();
         $returnedVisits = array();
 
         foreach($visits as $visit) {

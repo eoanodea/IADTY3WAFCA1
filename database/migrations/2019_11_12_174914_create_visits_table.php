@@ -17,6 +17,9 @@ class CreateVisitsTable extends Migration
             $table->bigIncrements('id');
             $table->string('notes', 255);
             $table->integer('duration');
+            $table->date('date', 0)->nullable();
+            $table->time('time', 0)->nullable();
+            $table->boolean('cancelled')->default(false);
             $table->timestamps();
             
             $table->bigInteger('doctor_id')->unsigned();

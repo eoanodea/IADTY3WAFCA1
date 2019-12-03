@@ -30,6 +30,8 @@ class VisitsTableSeeder extends Seeder
             //Populate visit with faker data
             $visit->notes = $faker->paragraph();
             $visit->duration = $faker->numberBetween($min = 5, $max = 180);
+            $visit->date = $faker->date($format="Y-m-d", $startDate = 'now');
+            $visit->time = $faker->time();
             //Assign foreign keys to visit
             $visit->patient_id = $user->patient->id;
             $visit->doctor_id = $doctor->doctor->id;

@@ -7,7 +7,7 @@
             <div class="card">
                     <div class="card-header">
                         Visits
-                    <a href="{{ route('admin.visits.create') }}" class="btn btn-primary float-right">Add</a>
+                    <a href="{{ route('patient.visits.create') }}" class="btn btn-primary float-right">Add</a>
                     </div>
                     <div class="card-body">
                         @if (count($visits) === 0)
@@ -26,13 +26,13 @@
                                     @foreach ($visits as $visit)
                                         <tr data-id="{{ $visit->id }}">
                                             <td>{{ $visit->date }}</td>
-                                            <td><a href="{{ route('admin.doctors.show', $visit->doctor->user->id) }}">{{ $visit->doctor->user->first_name }} {{ $visit->doctor->user->last_name }} </a></td>
-                                            <td><a href="{{ route('admin.patients.show', $visit->patient->user->id) }}">{{ $visit->patient->user->first_name }} {{ $visit->patient->user->last_name }} </a></td>
+                                            <td><a href="{{ route('patient.doctors.show', $visit->doctor->user->id) }}">{{ $visit->doctor->user->first_name }} {{ $visit->doctor->user->last_name }} </a></td>
+                                            <td><a href="{{ route('patient.patients.show', $visit->patient->user->id) }}">{{ $visit->patient->user->first_name }} {{ $visit->patient->user->last_name }} </a></td>
                                             <td>{{ $visit->duration}} minutes</td>
                                             <td>
-                                                <a href="{{ route('admin.visits.show', $visit->id) }}" class="btn btn-default">View</a>
-                                                <a href="{{ route('admin.visits.edit', $visit->id) }}" class="btn btn-warning">Edit</a>
-                                            <form style="display:inline-block" method="POST" action="{{ route('admin.visits.destroy', $visit->id) }}">
+                                                <a href="{{ route('patient.visits.show', $visit->id) }}" class="btn btn-default">View</a>
+                                                <a href="{{ route('patient.visits.edit', $visit->id) }}" class="btn btn-warning">Edit</a>
+                                            <form style="display:inline-block" method="POST" action="{{ route('patient.visits.destroy', $visit->id) }}">
                                                 <input type="hidden" name="_method" value="DELETE">
                                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                 <button type="submit" class="form-control btn btn-danger">Delete</button>

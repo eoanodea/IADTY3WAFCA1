@@ -13,6 +13,14 @@
                             <table id="table-visits" class="table table-hover">
                                 <tbody>
                                         <tr>
+                                            <td>Date</td>
+                                            <td>{{ $visit->date }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Time</td>
+                                            <td>{{ $visit->time }}</td>
+                                        </tr>
+                                        <tr>
                                             <td>Patient</td>
                                             <td><a href="{{ route('admin.patients.show', $visit->patient->user->id) }}">{{ $visit->patient->user->first_name }} {{ $visit->patient->user->last_name }} </a></td>
                                         </tr>

@@ -50,6 +50,14 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
+                                    <label for="date">Date</label>
+                                    <input type="date" class="form-control" id="date" name="date" value="{{ old('date', $visit->date) }}"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="time">Time</label>
+                                    <input type="time" class="form-control" id="time" name="time" value="{{ old('time', $visit->time) }}"/>
+                                </div>
+                                <div class="form-group">
                                     <label for="duration">Duration (Minutes)</label>
                                     <input type="number" class="form-control" id="duration" name="duration" value="{{ old('duration', $visit->duration) }}"/>
                                 </div>

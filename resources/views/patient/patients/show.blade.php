@@ -49,13 +49,7 @@
                                         @endif
                                     </tbody>
                             </table>
-                            <a href="{{ route('doctor.patients.index', $user->id) }}" class="btn btn-default">Back</a>
-                            <a href="{{ route('doctor.patients.edit', $user->id) }}" class="btn btn-warning">Edit</a>
-                            <form style="display:inline-block" method="POST" action="{{ route('doctor.patients.destroy', $user->id) }}">
-                                <input type="hidden" name="_method" value="DELETE">
-                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                <button type="submit" class="form-control btn btn-danger">Delete</button>
-                            </form>
+                            <a href="{{ route('patient.patients.index', $user->id) }}" class="btn btn-default">Back</a>
                     </div>
             </div>
         </div>
@@ -63,7 +57,7 @@
                 <div class="card">
                         <div class="card-header">
                             Visit Log
-                            <a href={{ route('doctor.visits.create', $user->id) }} class="btn btn-primary float-right">Add Visit</a>
+                            {{-- <a href={{ route('patient.visits.create', $user->id) }} class="btn btn-primary float-right">Add Visit</a> --}}
                         </div>
                         <div class="card-body">
                             @if (count($visits) === 0)
@@ -80,9 +74,9 @@
                                     @foreach ($visits as $visit)
                                             <tr data-id="{{ $visit->id }}">
                                                 <td>{{ $visit->date }}</td>
-                                                <td><a href="{{ route('doctor.doctors.show', $visit->doctor->user->id) }}">{{ $visit->doctor->user->first_name }} {{ $visit->doctor->user->last_name }} @if(Auth::user()->id == $user->id) (You) @endif</a></td>
+                                                <td>Dr. {{ $visit->doctor->user->first_name }} {{ $visit->doctor->user->last_name }}</td>
                                                 <td>{{ $visit->duration}} minutes</td>
-                                                <td><a href="{{ route('doctor.visits.show', $visit->id) }}" class="btn btn-primary">View</a></td>
+                                                <td><a href="{{ route('patient.visits.show', $visit->id) }}" class="btn btn-primary">View</a></td>
                                             </tr>
                                     @endforeach
                                 </tbody>

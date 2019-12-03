@@ -15,6 +15,7 @@
                         @else
                             <table id="table-visits" class="table table-hover">
                                 <thead>
+                                    <th>Date</th>
                                     <th>Doctor</th>
                                     <th>Patient</th>
                                     <th>Duration</th>
@@ -24,6 +25,7 @@
                                     
                                     @foreach ($visits as $visit)
                                         <tr data-id="{{ $visit->id }}">
+                                            <td>{{ $visit->date }}</td>
                                             <td><a href="{{ route('doctor.doctors.show', $visit->doctor->user->id) }}">{{ $visit->doctor->user->first_name }} {{ $visit->doctor->user->last_name }} </a></td>
                                             <td><a href="{{ route('doctor.patients.show', $visit->patient->user->id) }}">{{ $visit->patient->user->first_name }} {{ $visit->patient->user->last_name }} </a></td>
                                             <td>{{ $visit->duration}} minutes</td>

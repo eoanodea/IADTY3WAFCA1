@@ -78,7 +78,7 @@
                                 <tbody>
                                     @foreach ($visits as $visit)
                                             <tr data-id="{{ $visit->id }}">
-                                                <td>{{ $visit->created_at }}</td>
+                                                <td>{{ $visit->date }}</td>
                                                 <td><a href="{{ route('admin.doctors.show', $visit->doctor->user->id) }}">{{ $visit->doctor->user->first_name }} {{ $visit->doctor->user->last_name }} </a></td>
                                                 <td>{{ $visit->duration}} minutes</td>
                                                 <td><a href="{{ route('admin.visits.show', $visit->id) }}" class="btn btn-primary">View</a></td>

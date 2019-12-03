@@ -18,6 +18,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/patient', 'Patient\PatientController@index')->name('patient.patients.index');
+Route::get('/patient/{id}', 'Patient\PatientController@show')->name('patient.patients.show');
+Route::get('/patient/visits/{id}', 'Patient\VisitController@show')->name('patient.visits.show');
+
 Route::get('/doctor/patient', 'Doctor\PatientController@index')->name('doctor.patients.index');
 Route::get('/doctor/patient/{id}', 'Doctor\PatientController@show')->name('doctor.patients.show');
 Route::get('/doctor/patients/create', 'Doctor\PatientController@create')->name('doctor.patients.create');
@@ -39,7 +43,7 @@ Route::get('/doctor/visits/{id}/edit', 'Doctor\VisitController@edit')->name('doc
 Route::put('/doctor/visits/{id}', 'Doctor\VisitController@update')->name('doctor.visits.update');
 Route::delete('/doctor/visits/{id}', 'Doctor\VisitController@destroy')->name('doctor.visits.destroy');
 
-Route::get('/admin/home', 'Admin\HomeController@index')->name('admin.home');
+Route::get('/admin/home', 'Admin\HomeController@index')->name('admin.index');
 Route::get('/admin/patients', 'Admin\PatientController@index')->name('admin.patients.index');
 Route::get('/admin/patients/create', 'Admin\PatientController@create')->name('admin.patients.create');
 Route::get('/admin/patients/{id}', 'Admin\PatientController@show')->name('admin.patients.show');

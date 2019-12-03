@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\Patient;
 
 use App\Http\Controllers\Controller;
 use App\Visit;
@@ -24,7 +24,7 @@ class VisitController extends Controller
     {
         $visit = Visit::findOrFail($id);
 
-        return view('admin.visits.show')->with([
+        return view('patient.visits.show')->with([
             'visit' => $visit
         ]);
     }

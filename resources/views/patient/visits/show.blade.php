@@ -22,29 +22,23 @@
                                         </tr>
                                         <tr>
                                             <td>Patient</td>
-                                            <td><a href="{{ route('doctor.patients.show', $visit->patient->user->id) }}">{{ $visit->patient->user->first_name }} {{ $visit->patient->user->last_name }} </a></td>
+                                            <td>{{ $visit->patient->user->first_name }} {{ $visit->patient->user->last_name }} </a></td>
                                         </tr>
                                         <tr>
                                             <td>Doctor</td>
-                                            <td><a href="{{ route('doctor.doctors.show', $visit->doctor->user->id) }}">{{ $visit->doctor->user->first_name }} {{ $visit->doctor->user->last_name }} </a></td>
+                                            <td>Dr. {{ $visit->doctor->user->first_name }} {{ $visit->doctor->user->last_name }}</td>
                                         </tr>
                                         <tr>
                                             <td>Duration</td>
                                             <td>{{ $visit->duration}} minutes</td>
                                         </tr>
                                         <tr>
-                                            <td>Notes</td>
-                                            <td>{{ $visit->notes }}</td>
+                                            <td>Date</td>
+                                            <td>{{ $visit->created_at }}</td>
                                         </tr>
                                     </tbody>
                             </table>
-                            <a href="{{ route('doctor.visits.index', $visit->id) }}" class="btn btn-default">Back</a>
-                            <a href="{{ route('doctor.visits.edit', $visit->id) }}" class="btn btn-warning">Edit</a>
-                            <form style="display:inline-block" method="POST" action="{{ route('doctor.visits.destroy', $visit->id) }}">
-                                <input type="hidden" name="_method" value="DELETE">
-                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                <button type="submit" class="form-control btn btn-danger">Delete</button>
-                            </form>
+                            <a href="{{ route('patient.patients.show', $visit->patient->user->id) }}" class="btn btn-default">Back</a>
                         
                     </div>
             </div>
