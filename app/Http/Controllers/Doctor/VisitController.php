@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Patient;
 use App\Visit;
 use Illuminate\Http\Request;
+use Auth;
 
 class VisitController extends Controller
 {
@@ -26,7 +27,10 @@ class VisitController extends Controller
      */
     public function index()
     {
-        $visits = Visit::all();
+        $user = Auth::user();
+        $visits = Visit::where('doctor_id', $user->doctor->id)->get();
+        
+
         return view('doctor.visits.index')->with([
             'visits' => $visits
         ]);
@@ -57,7 +61,7 @@ class VisitController extends Controller
         $patients = Patient::all();
         $doctors = Doctor::all();
 
-        if($patientId) return view('doctor.visits.create')->with([
+        if($patientId !== 0) return view('doctor.visits.create')->with([
             'doctors' => $doctors,
             'patients' => $patients,
             'patientId' => $patientId
