@@ -11,18 +11,45 @@
 |
 */
 
+/*
+|--------------------------------------------------------------------------
+| Unauthorized Routes
+|--------------------------------------------------------------------------
+*/
 Route::get('/', 'PageController@welcome')->name('welcome');
 Route::get('/about', 'PageController@about')->name('about');
 
+/*
+|--------------------------------------------------------------------------
+| Auth Routes
+|--------------------------------------------------------------------------
+*/
 Auth::routes();
 
+/*
+|--------------------------------------------------------------------------
+| Main Route - Redirects users to the correct route 
+| depending on the user's role
+|--------------------------------------------------------------------------
+*/
 Route::get('/home', 'HomeController@index')->name('home');
 
+
+/*
+|--------------------------------------------------------------------------
+| Patient Routes
+|--------------------------------------------------------------------------
+*/
 Route::get('/patient', 'Patient\PatientController@index')->name('patient.patients.index');
 Route::get('/patient/profile', 'Patient\PatientController@show')->name('patient.patients.show');
 Route::get('/patient/visits/{id}', 'Patient\VisitController@show')->name('patient.visits.show');
 Route::get('/patient/visits/cancel/{id}', 'Patient\VisitController@cancel')->name('patient.visits.cancel');
 
+/*
+|--------------------------------------------------------------------------
+| Doctor Routes
+|--------------------------------------------------------------------------
+*/
 Route::get('/doctor/patient', 'Doctor\PatientController@index')->name('doctor.patients.index');
 Route::get('/doctor/patient/{id}', 'Doctor\PatientController@show')->name('doctor.patients.show');
 Route::get('/doctor/patients/create', 'Doctor\PatientController@create')->name('doctor.patients.create');
@@ -44,6 +71,12 @@ Route::get('/doctor/visits/{id}/edit', 'Doctor\VisitController@edit')->name('doc
 Route::put('/doctor/visits/{id}', 'Doctor\VisitController@update')->name('doctor.visits.update');
 Route::delete('/doctor/visits/{id}', 'Doctor\VisitController@destroy')->name('doctor.visits.destroy');
 Route::get('/doctor/visits/cancel/{id}', 'Doctor\VisitController@cancel')->name('doctor.visits.cancel');
+
+/*
+|--------------------------------------------------------------------------
+| Admin Routes
+|--------------------------------------------------------------------------
+*/
 
 Route::get('/admin/home', 'Admin\HomeController@index')->name('admin.index');
 Route::get('/admin/patients', 'Admin\PatientController@index')->name('admin.patients.index');
