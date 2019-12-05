@@ -62,6 +62,10 @@
                                     <input type="number" class="form-control" id="duration" name="duration" value="{{ old('duration', $visit->duration) }}"/>
                                 </div>
                                 <div class="form-group">
+                                    <label for="cost">Cost</label>
+                                    <input type="number" class="form-control" id="cost" name="cost" value="{{ old('cost', $visit->cost) }}"/>
+                                </div>
+                                <div class="form-group">
                                     <label for="notes">Notes</label>
                                     <textarea class="form-control" id="notes" name="notes" >{{ old('notes', $visit->notes) }}</textarea>
                                 </div>

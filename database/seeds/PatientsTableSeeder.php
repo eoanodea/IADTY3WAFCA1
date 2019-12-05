@@ -7,7 +7,8 @@ use Illuminate\Database\Seeder;
 class PatientsTableSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Creates a patient for each user that has a patient role
+     * in the database
      *
      * @return void
      */

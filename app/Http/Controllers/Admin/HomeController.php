@@ -13,6 +13,11 @@ class HomeController extends Controller
         $this->middleware('role:admin');
     }
 
+    /**
+     * Return the admin home page
+     * 
+     * @return \Illuminate\Http\Response
+     */
     public function index() {
         return view('admin.home');
     }

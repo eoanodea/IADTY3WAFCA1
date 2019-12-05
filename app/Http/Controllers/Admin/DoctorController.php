@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\Hash;
 
 class DoctorController extends Controller
 {
+    /**
+     * Only authenticated users with the admin role
+     * can use this controller
+     */
     public function __construct()
     {
         $this->middleware('auth');
@@ -19,8 +23,9 @@ class DoctorController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     *
+     * Get all users who are doctors, 
+     * and return a view with these users
+     * 
      * @return \Illuminate\Http\Response
      */
     public function index()
@@ -40,7 +45,7 @@ class DoctorController extends Controller
     }
 
      /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new doctor.
      *
      * @return \Illuminate\Http\Response
      */
@@ -50,7 +55,8 @@ class DoctorController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Validate and store a newly created 
+     * user and doctor in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -89,7 +95,8 @@ class DoctorController extends Controller
 
 
     /**
-     * Display the specified resource.
+     * Display the specified doctor, along 
+     * with visits associated with this doctor
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -128,7 +135,7 @@ class DoctorController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Validate and update the doctor in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id

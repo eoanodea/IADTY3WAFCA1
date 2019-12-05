@@ -8,6 +8,14 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
+    /*
+    |--------------------------------------------------------------------------
+    | User Model
+    |--------------------------------------------------------------------------
+    |
+    | This model is responsible for handling users on the system. 
+    | A user has one doctor or visit, and has one role.
+    */
     use Notifiable;
 
     /**

@@ -56,12 +56,19 @@ class UsersTableSeeder extends Seeder
         });
 
     }
+    /**
+     * Concatenates a random phone number for the user 
+     */
     private function random_phone() {
         return '0' . 
             $this->random_str(2, '0123456789'). '-' . 
             $this->random_str(7, '0123456789');
     }
-    //fill in keyspace
+    /**
+     * Generates a random number
+     * @param int $length
+     * @param string $keyspace
+     */
     private function random_str($length, $keyspace) {
         $pieces = [];
         $max = mb_strlen($keyspace, '8bit') - 1;

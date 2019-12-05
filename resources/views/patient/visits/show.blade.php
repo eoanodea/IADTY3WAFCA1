@@ -32,6 +32,10 @@
                                             <td>Duration</td>
                                             <td>{{ $visit->duration}} minutes</td>
                                         </tr>
+                                        <tr>
+                                            <td>Cost</td>
+                                            <td>€{{ $visit->cost}}</td>
+                                        </tr>
                                     </tbody>
                             </table>
                             <a href="{{ route('patient.patients.show', $visit->patient->user->id) }}" class="btn btn-default">Back</a>

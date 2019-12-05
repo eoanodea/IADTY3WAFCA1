@@ -82,6 +82,7 @@ class VisitController extends Controller
     {
         $request->validate([
             'duration' => 'required|integer',
+            'cost' => 'required|integer',
             'notes' => 'required|string',
             'date' => 'required|date',
             'time' => 'required',
@@ -91,6 +92,7 @@ class VisitController extends Controller
 
         $visit = new Visit();
         $visit->duration = $request->input('duration');
+        $visit->cost = $request->input('cost');
         $visit->notes = $request->input('notes');
         $visit->date = $request->input('date');
         $visit->time = $request->input('time');
@@ -136,6 +138,7 @@ class VisitController extends Controller
 
         $request->validate([
             'duration' => 'required|integer',
+            'cost' => 'required|integer',
             'notes' => 'required|string',
             'date' => 'required|date',
             'time' => 'required',
@@ -144,6 +147,7 @@ class VisitController extends Controller
         ]);
 
         $visit->duration = $request->input('duration');
+        $visit->cost = $request->input('cost');
         $visit->notes = $request->input('notes');
         $visit->date = $request->input('date');
         $visit->time = $request->input('time');

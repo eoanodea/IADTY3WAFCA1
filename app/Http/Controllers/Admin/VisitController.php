@@ -10,6 +10,10 @@ use Illuminate\Http\Request;
 
 class VisitController extends Controller
 {
+    /**
+     * Only authenticated users with the admin role
+     * can use this controller
+     */
     public function __construct()
     {
         $this->middleware('auth');
@@ -24,7 +28,6 @@ class VisitController extends Controller
     public function index()
     {
         $visits = Visit::all();
-        
 
         return view('admin.visits.index')->with([
             'visits' => $visits
@@ -32,7 +35,8 @@ class VisitController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Return all doctors and patients and
+     * show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
@@ -48,7 +52,7 @@ class VisitController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created visit in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -57,6 +61,7 @@ class VisitController extends Controller
     {
         $request->validate([
             'duration' => 'required|integer',
+            'cost' => 'required|integer',
             'notes' => 'required|string',
             'date' => 'required|date',
             'time' => 'required',
@@ -66,6 +71,7 @@ class VisitController extends Controller
 
         $visit = new Visit();
         $visit->duration = $request->input('duration');
+        $visit->cost = $request->input('cost');
         $visit->notes = $request->input('notes');
         $visit->date = $request->input('date');
         $visit->time = $request->input('time');
@@ -80,7 +86,7 @@ class VisitController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified visit.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -126,6 +132,7 @@ class VisitController extends Controller
 
         $request->validate([
             'duration' => 'required|integer',
+            'cost' => 'required|integer',
             'notes' => 'required|string',
             'date' => 'required|date',
             'time' => 'required',
@@ -134,6 +141,7 @@ class VisitController extends Controller
         ]);
 
         $visit->duration = $request->input('duration');
+        $visit->cost = $request->input('cost');
         $visit->notes = $request->input('notes');
         $visit->date = $request->input('date');
         $visit->time = $request->input('time');
@@ -162,7 +170,7 @@ class VisitController extends Controller
     }
 
     /**
-     * Cancel the Visit
+     * Cancel a Visit
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response

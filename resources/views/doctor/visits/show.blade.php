@@ -33,6 +33,10 @@
                                             <td>{{ $visit->duration}} minutes</td>
                                         </tr>
                                         <tr>
+                                            <td>Cost</td>
+                                            <td>€{{ $visit->cost}}</td>
+                                        </tr>
+                                        <tr>
                                             <td>Notes</td>
                                             <td>{{ $visit->notes }}</td>
                                         </tr>

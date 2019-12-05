@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Hash;
 class PatientController extends Controller
 {
 
+    /**
+     * Only authenticated users with the admin role
+     * can use this controller
+     */
     public function __construct()
     {
         $this->middleware('auth');
@@ -20,8 +24,9 @@ class PatientController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     *
+     * Get all users who are patients, 
+     * and return a view with these users
+     * 
      * @return \Illuminate\Http\Response
      */
     public function index()
@@ -41,7 +46,7 @@ class PatientController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new patient.
      *
      * @return \Illuminate\Http\Response
      */
@@ -50,7 +55,8 @@ class PatientController extends Controller
         return view('admin.patients.create');
     }
     /**
-     * Display the specified resource.
+     * Display the specified patient, along 
+     * with visits associated with this patient
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -72,6 +78,13 @@ class PatientController extends Controller
         ]);
     }
 
+    /**
+     * Validate and store a newly created 
+     * user and patient in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
         $request->validate([
@@ -106,13 +119,11 @@ class PatientController extends Controller
         $patient->user_id = $user->id;
         $patient->save();
         
-        return view('admin.patients.show')->with([
-            'user' => $user
-        ]);
+        return redirect()->route('admin.patients.show', $user->id);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified patient.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -127,7 +138,7 @@ class PatientController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Validate and update the patient in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -166,9 +177,7 @@ class PatientController extends Controller
         $user->save();
         $user->patient->save();
 
-        return view('admin.patients.show')->with([
-            'user' => $user
-        ]);
+        return redirect()->route('admin.patients.show', $user->id);
     }
 
     /**

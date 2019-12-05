@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 
 class DoctorController extends Controller
 {
+    /**
+     * Only authenticated users with the doctor role
+     * can use this controller
+     */
     public function __construct()
     {
         $this->middleware('auth');
@@ -24,7 +28,8 @@ class DoctorController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified doctor, 
+     * along with visits associated with it
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -63,7 +68,7 @@ class DoctorController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Validate and update the doctor in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id

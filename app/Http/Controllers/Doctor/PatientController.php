@@ -12,12 +12,23 @@ use Illuminate\Support\Facades\Hash;
 
 class PatientController extends Controller
 {
+    /**
+     * Only authenticated users with the admin role
+     * can use this controller
+     */
     public function __construct()
     {
         $this->middleware('auth');
         $this->middleware('role:doctor');
     }
     
+    /**
+     * Get all users who are patients, 
+     * and return a view with these users
+     * 
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index() {
         $users = User::all();
         $returnedUsers = array();
@@ -33,6 +44,13 @@ class PatientController extends Controller
         ]);
     }
 
+    /**
+     * Display the specified patient, along 
+     * with visits associated with this patient
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function show($id) {
         $user = User::findOrFail($id);
         $visits = Visit::orderBy('date', 'DESC')->get();
@@ -60,7 +78,13 @@ class PatientController extends Controller
         return view('doctor.patients.create');
     }
    
-
+    /**
+     * Validate and store a newly created 
+     * user and patient in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
         $request->validate([
@@ -114,7 +138,7 @@ class PatientController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Validate and update the patient in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id

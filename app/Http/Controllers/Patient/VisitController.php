@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 
 class VisitController extends Controller
 {
+    /**
+     * Only authenticated users with the patient role
+     * can use this controller
+     */
     public function __construct()
     {
         $this->middleware('auth');

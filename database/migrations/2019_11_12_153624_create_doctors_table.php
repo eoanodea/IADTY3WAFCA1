@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 class CreateDoctorsTable extends Migration
 {
     /**
-     * Run the migrations.
+     * Migration for creating the doctors table
      *
      * @return void
      */

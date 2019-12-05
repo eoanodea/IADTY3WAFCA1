@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 class CreateVisitsTable extends Migration
 {
     /**
-     * Run the migrations.
+     * Migration for creating the visits table
      *
      * @return void
      */
@@ -17,6 +17,7 @@ class CreateVisitsTable extends Migration
             $table->bigIncrements('id');
             $table->string('notes', 255);
             $table->integer('duration');
+            $table->integer('cost');
             $table->date('date', 0)->nullable();
             $table->time('time', 0)->nullable();
             $table->boolean('cancelled')->default(false);
